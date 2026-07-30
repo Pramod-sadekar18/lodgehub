@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Book Room</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+background:#f3f5f7;
+}
+
+.container{
+width:90%;
+max-width:1200px;
+margin:40px auto;
+display:grid;
+grid-template-columns:2fr 1fr;
+gap:30px;
+}
+
+.card{
+background:white;
+border-radius:10px;
+padding:25px;
+box-shadow:0 2px 12px rgba(0,0,0,.1);
+}
+
+.property-image{
+width:100%;
+height:250px;
+object-fit:cover;
+border-radius:10px;
+margin-bottom:20px;
+}
+
+h2{
+margin-bottom:20px;
+}
+
+.form-group{
+margin-bottom:18px;
+}
+
+label{
+display:block;
+margin-bottom:8px;
+font-weight:bold;
+}
+
+input,
+select{
+width:100%;
+padding:12px;
+border:1px solid #ddd;
+border-radius:6px;
+font-size:16px;
+}
+
+.info{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+margin-top:20px;
+}
+
+.info-box{
+background:#f8f8f8;
+padding:15px;
+border-radius:8px;
+}
+
+.summary p{
+margin:15px 0;
+font-size:17px;
+}
+
+.total{
+font-size:28px;
+font-weight:bold;
+color:green;
+}
+
+button{
+width:100%;
+padding:15px;
+background:#0d6efd;
+border:none;
+color:white;
+font-size:18px;
+border-radius:8px;
+cursor:pointer;
+margin-top:20px;
+}
+
+button:hover{
+background:#0b5ed7;
+}
+
+@media(max-width:900px){
+
+.container{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="card">
+
+<img
+id="propertyImage"
+class="property-image"
+src="">
+
+<h2 id="propertyName">
+Loading...
+</h2>
+
+<div class="form-group">
+
+<label>Select Room Type</label>
+
+<select id="roomSelect">
+
+<option value="">Select Room</option>
+
+</select>
+
+</div>
+
+<div class="info">
+
+<div class="info-box">
+
+<b>Price/Night</b>
+
+<h3>
+
+₹<span id="price">
+0
+</span>
+
+</h3>
+
+</div>
+
+<div class="info-box">
+
+<b>Capacity</b>
+
+<h3>
+
+<span id="capacity">
+0
+</span>
+
+Guests
+
+</h3>
+
+</div>
+
+<div class="info-box">
+
+<b>Available Rooms</b>
+
+<h3>
+
+<span id="availableRooms">
+0
+</span>
+
+</h3>
+
+</div>
+
+<div class="info-box">
+
+<b>Property Type</b>
+
+<h3 id="propertyType">
+-
+</h3>
+
+</div>
+
+</div>
+
+<br>
+
+<div class="form-group">
+
+<label>Check In</label>
+
+<input
+type="date"
+id="checkin">
+
+</div>
+
+<div class="form-group">
+
+<label>Check Out</label>
+
+<input
+type="date"
+id="checkout">
+
+</div>
+
+<div class="form-group">
+
+<label>Guest Type</label>
+
+<select id="guestType">
+
+<option value="family">Family</option>
+
+<option value="couple">Couple</option>
+
+<option value="gents">Only Gents</option>
+
+<option value="ladies">Only Ladies</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Number of Guests</label>
+
+<input
+type="number"
+id="guests"
+value="1"
+min="1">
+
+</div>
+
+<div class="form-group">
+
+<label>Number of Rooms</label>
+
+<input
+type="number"
+id="rooms"
+value="1"
+min="1">
+
+</div>
+
+<button id="paymentBtn">
+
+Proceed To Payment
+
+</button>
+
+</div>
+
+<div class="card summary">
+
+<h2>
+
+Booking Summary
+
+</h2>
+
+<p>
+
+<b>Property</b>
+
+<br>
+
+<span id="summaryProperty">
+-
+</span>
+
+</p>
+
+<p>
+
+<b>Room</b>
+
+<br>
+
+<span id="summaryRoom">
+-
+</span>
+
+</p>
+
+<p>
+
+<b>Check In</b>
+
+<br>
+
+<span id="summaryCheckin">
+-
+</span>
+
+</p>
+
+<p>
+
+<b>Check Out</b>
+
+<br>
+
+<span id="summaryCheckout">
+-
+</span>
+
+</p>
+
+<p>
+
+<b>Total Nights</b>
+
+<br>
+
+<span id="summaryNights">
+0
+</span>
+
+</p>
+
+<p>
+
+<b>Rooms</b>
+
+<br>
+
+<span id="summaryRooms">
+1
+</span>
+
+</p>
+
+<p>
+
+<b>Price/Night</b>
+
+<br>
+
+₹<span id="summaryPrice">
+0
+</span>
+
+</p>
+
+<hr>
+
+<p class="total">
+
+₹
+
+<span id="totalAmount">
+
+0
+
+</span>
+
+</p>
+
+</div>
+
+</div>
+
+<script>
+
+// JavaScript will be added in Part 2
+// ----------------------------
+// Property ID from Django
+// ----------------------------
+
+const propertyId = "{{ property_id }}";
+
+// APIs
+
+const PROPERTY_API =
+`http://127.0.0.1:114/api/properties/${propertyId}/`;
+
+const BOOKING_API =
+"http://127.0.0.1:114/book_api/bookings/";
+
+// Variables
+
+let selectedRoom = null;
+
+let propertyData = null;
+
+
+// -------------------------------------
+// Load Property
+// -------------------------------------
+
+fetch(PROPERTY_API)
+
+.then(res=>res.json())
+
+.then(data=>{
+
+    propertyData = data;
+
+    loadProperty(data);
+
+})
+
+.catch(err=>{
+
+    console.log(err);
+
+});
+
+
+// -------------------------------------
+// Load Property Details
+// -------------------------------------
+
+function loadProperty(property){
+
+document.getElementById("propertyName").innerHTML =
+property.name;
+
+document.getElementById("summaryProperty").innerHTML =
+property.name;
+
+document.getElementById("propertyType").innerHTML =
+property.property_type;
+
+if(property.images.length>0){
+
+document.getElementById("propertyImage").src =
+property.images[0].image;
+
+}
+
+
+// Load Rooms
+
+let html="<option value=''>Select Room</option>";
+
+property.rooms.forEach(room=>{
+
+html+=`
+
+<option
+
+value="${room.id}"
+
+data-price="${room.price_per_night}"
+
+data-capacity="${room.capacity}"
+
+data-total="${room.total_rooms}"
+
+>
+
+${room.room_name}
+
+</option>
+
+`;
+
+});
+
+document.getElementById("roomSelect").innerHTML =
+html;
+
+}
+
+
+
+// -------------------------------------
+// Room Changed
+// -------------------------------------
+
+document.getElementById("roomSelect")
+
+.addEventListener("change",function(){
+
+const option =
+this.options[this.selectedIndex];
+
+selectedRoom={
+
+id:this.value,
+
+name:option.text,
+
+price:Number(option.dataset.price),
+
+capacity:Number(option.dataset.capacity),
+
+available:Number(option.dataset.total)
+
+};
+
+document.getElementById("price").innerHTML =
+selectedRoom.price;
+
+document.getElementById("capacity").innerHTML =
+selectedRoom.capacity;
+
+document.getElementById("availableRooms").innerHTML =
+selectedRoom.available;
+
+document.getElementById("summaryRoom").innerHTML =
+selectedRoom.name;
+
+document.getElementById("summaryPrice").innerHTML =
+selectedRoom.price;
+
+calculateTotal();
+
+});
+
+
+
+// -------------------------------------
+// Calculate Total
+// -------------------------------------
+
+function calculateTotal(){
+
+if(selectedRoom==null){
+
+return;
+
+}
+
+const checkin =
+new Date(document.getElementById("checkin").value);
+
+const checkout =
+new Date(document.getElementById("checkout").value);
+
+const rooms =
+Number(document.getElementById("rooms").value);
+
+if(isNaN(checkin) || isNaN(checkout)){
+
+return;
+
+}
+
+const diff =
+(checkout-checkin)/(1000*60*60*24);
+
+if(diff<=0){
+
+return;
+
+}
+
+const total =
+diff *
+selectedRoom.price *
+rooms;
+
+document.getElementById("summaryCheckin").innerHTML =
+document.getElementById("checkin").value;
+
+document.getElementById("summaryCheckout").innerHTML =
+document.getElementById("checkout").value;
+
+document.getElementById("summaryNights").innerHTML =
+diff;
+
+document.getElementById("summaryRooms").innerHTML =
+rooms;
+
+document.getElementById("totalAmount").innerHTML =
+total;
+
+}
+
+
+
+// Events
+
+document.getElementById("checkin")
+
+.addEventListener("change",calculateTotal);
+
+document.getElementById("checkout")
+
+.addEventListener("change",calculateTotal);
+
+document.getElementById("rooms")
+
+.addEventListener("input",calculateTotal);
+
+
+
+
+// -------------------------------------
+// Proceed To Payment
+// -------------------------------------
+
+document.getElementById("paymentBtn")
+
+.addEventListener("click",function(){
+
+if(selectedRoom==null){
+
+alert("Please select room.");
+
+return;
+
+}
+
+const booking={
+
+property:propertyData.id,
+
+room:selectedRoom.id,
+
+check_in:
+document.getElementById("checkin").value,
+
+check_out:
+document.getElementById("checkout").value,
+
+guests:
+document.getElementById("guests").value,
+
+guest_type:
+document.getElementById("guestType").value,
+
+number_of_rooms:
+document.getElementById("rooms").value
+
+};
+
+
+// Store booking temporarily
+
+
+
+
+// Redirect// Save booking data
+localStorage.setItem(
+    "booking",
+    JSON.stringify({
+        booking: booking,
+        property: propertyData,
+        room: selectedRoom,
+        total: document.getElementById("totalAmount").innerHTML
+    })
+);
+
+// Check JWT
+const hasToken = Boolean(localStorage.getItem("access") || localStorage.getItem("access_token"));
+const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
+const token = hasToken || isAuthenticated;
+
+if (!token) {
+
+    localStorage.setItem("redirectAfterLogin", "/");
+
+    alert("Please login to continue.");
+
+    window.location.href = "/login_ui/";
+
+    return;
+}
+
+// User is logged in
+window.location.href = "/";
+
+
+
+});
+
+</script>
+
+</body>
+</html>

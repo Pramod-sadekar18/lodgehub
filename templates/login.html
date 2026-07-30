@@ -1,0 +1,236 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+```
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Lodge Booking System | Login</title>
+
+<style>
+
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body{
+        min-height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        background:linear-gradient(
+            135deg,
+            #0f172a,
+            #1e293b,
+            #2563eb
+        );
+    }
+
+    .container{
+        width:420px;
+        background:#ffffff;
+        padding:40px;
+        border-radius:18px;
+        box-shadow:0 15px 40px rgba(0,0,0,0.25);
+    }
+
+    .logo{
+        text-align:center;
+        font-size:60px;
+        margin-bottom:10px;
+    }
+
+    .title{
+        text-align:center;
+        color:#0f172a;
+        margin-bottom:10px;
+    }
+
+    .subtitle{
+        text-align:center;
+        color:#64748b;
+        margin-bottom:30px;
+    }
+
+    .form-group{
+        margin-bottom:20px;
+    }
+
+    label{
+        display:block;
+        margin-bottom:8px;
+        font-weight:600;
+        color:#334155;
+    }
+
+    input{
+        width:100%;
+        padding:12px;
+        border:1px solid #cbd5e1;
+        border-radius:8px;
+        font-size:15px;
+        outline:none;
+    }
+
+    input:focus{
+        border-color:#2563eb;
+    }
+
+    .login-btn{
+        width:100%;
+        padding:14px;
+        border:none;
+        border-radius:8px;
+        background:#2563eb;
+        color:white;
+        font-size:16px;
+        cursor:pointer;
+        transition:0.3s;
+    }
+
+    .login-btn:hover{
+        background:#1d4ed8;
+    }
+
+    #message{
+        text-align:center;
+        margin-top:15px;
+        font-weight:bold;
+    }
+
+    .extra-links{
+        margin-top:20px;
+        text-align:center;
+    }
+
+    .extra-links a{
+        text-decoration:none;
+        color:#2563eb;
+        font-weight:600;
+    }
+
+    .divider{
+        margin:25px 0;
+        border-top:1px solid #e2e8f0;
+    }
+
+    .features{
+        font-size:14px;
+        color:#475569;
+    }
+
+    .features p{
+        margin-bottom:8px;
+    }
+
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<div class="container">
+
+    <div class="logo">
+        🏨
+    </div>
+
+    <h1 class="title">
+        Welcome Back
+    </h1>
+
+    <p class="subtitle">
+        Sign in to your Lodge Booking Account
+    </p>
+
+    <form id="loginForm">
+
+        <div class="form-group">
+
+            <label for="username">
+                Username
+            </label>
+
+            <input
+                type="text"
+                id="username"
+                placeholder="Enter your username"
+                required
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="password">
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+                required
+            >
+
+        </div>
+
+        <button
+            type="submit"
+            class="login-btn">
+
+            Login
+
+        </button>
+
+    </form>
+
+    <div id="message"></div>
+
+    <div class="extra-links">
+
+        <p>
+            Don't have an account?
+            <a href="/">
+                Register Here
+            </a>
+        </p>
+
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="features">
+
+        <p>✅ Secure JWT Authentication</p>
+
+        <p>✅ Lodge Reservation Management</p>
+
+        <p>✅ User Profile Dashboard</p>
+
+        <p>✅ Fast & Secure Booking System</p>
+
+        <p>✅ Django REST Framework Powered</p>
+
+    </div>
+
+</div>
+
+<script src="{% static 'js/login.js' %}"></script>
+```
+
+</body>
+
+</html>

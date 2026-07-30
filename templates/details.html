@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Property Details | LodgeHub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Fonts & Tabler Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+
+    <style>
+        :root {
+            --forest:    #1B4332;
+            --sage:      #40916C;
+            --mint:      #D8F3DC;
+            --sand:      #F8F5F0;
+            --warm-white:#FDFCFB;
+            --charcoal:  #1C1917;
+            --stone:     #78716C;
+            --pebble:    #D6D3D1;
+            --amber:     #B45309;
+            --amber-bg:  #FFFBEB;
+            --sky:       #0369A1;
+            --sky-bg:    #F0F9FF;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,.04);
+            --shadow-md: 0 8px 24px rgba(0,0,0,.08);
+            --r-sm: 8px;
+            --r-md: 14px;
+            --r-lg: 20px;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--sand);
+            color: var(--charcoal);
+            line-height: 1.6;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            height: 70px;
+            background: var(--warm-white);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 6%;
+            border-bottom: 1px solid var(--pebble);
+            position: sticky;
+            top: 0;
+            z-index: 200;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--forest);
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .logo-mark {
+            width: 38px;
+            height: 38px;
+            background: var(--forest);
+            color: white;
+            border-radius: var(--r-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--stone);
+            font-weight: 500;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover { color: var(--forest); }
+
+        .btn-user {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid var(--pebble);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            background: white;
+        }
+
+        .btn-ghost {
+            border: 1.5px solid var(--pebble);
+            background: transparent;
+            color: var(--charcoal);
+            padding: 8px 16px;
+            border-radius: var(--r-sm);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--sage);
+            background: var(--mint);
+            color: var(--forest);
+        }
+
+        /* BREADCRUMB */
+        .breadcrumb-wrap {
+            max-width: 1200px;
+            margin: 20px auto 0;
+            padding: 0 24px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--stone);
+        }
+
+        .breadcrumb a {
+            color: var(--stone);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb a:hover { color: var(--forest); }
+
+        /* HERO SECTION */
+        .hero-section {
+            max-width: 1200px;
+            margin: 16px auto 32px;
+            padding: 0 24px;
+        }
+
+        .hero-card {
+            position: relative;
+            height: 480px;
+            border-radius: var(--r-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            background: var(--forest);
+        }
+
+        .hero-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.85;
+            transition: transform 0.4s ease;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(15,23,42,0.92) 0%, rgba(15,23,42,0.4) 50%, transparent 100%);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            color: white;
+        }
+
+        .hero-badges {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .hero-badge {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .hero-badge.rating { background: var(--amber-bg); color: var(--amber); border: none; }
+        .hero-badge.verified { background: var(--mint); color: var(--forest); border: none; }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            margin-bottom: 8px;
+            line-height: 1.15;
+        }
+
+        .hero-subtitle {
+            font-size: 16px;
+            color: rgba(255,255,255,0.85);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .price-tag {
+            font-size: 28px;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            color: var(--mint);
+        }
+
+        .price-tag span {
+            font-size: 13px;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 400;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .btn-book-primary {
+            background: var(--sage);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: var(--r-md);
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 14px rgba(64,145,108,0.4);
+            transition: all 0.2s;
+        }
+
+        .btn-book-primary:hover {
+            background: #2D6A4F;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(64,145,108,0.5);
+        }
+
+        /* MAIN CONTENT LAYOUT */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto 60px;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: 2.2fr 1fr;
+            gap: 32px;
+        }
+
+        .section-card {
+            background: var(--warm-white);
+            border: 1px solid var(--pebble);
+            border-radius: var(--r-lg);
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: var(--forest);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: var(--sage);
+            font-size: 26px;
+        }
+
+        .about-text {
+            color: var(--charcoal);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        /* BADGES GRID */
+        .badges-grid {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tag-pill {
+            background: var(--sand);
+            border: 1.5px solid var(--pebble);
+            color: var(--charcoal);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .tag-pill i { color: var(--sage); font-size: 16px; }
+
+        /* ROOMS GRID */
+        .room-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .room-card {
+            background: white;
+            border: 1px solid var(--pebble);
+            border-radius: var(--r-md);
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+
+        .room-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--sage);
+        }
+
+        .room-img {
+            height: 170px;
+            background: var(--mint);
+            object-fit: cover;
+            width: 100%;
+        }
+
+        .room-body { padding: 18px; }
+        .room-name { font-size: 16px; font-weight: 700; color: var(--charcoal); margin-bottom: 6px; }
+        .room-desc { font-size: 13px; color: var(--stone); margin-bottom: 12px; line-height: 1.5; }
+        
+        .room-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--stone);
+            margin-bottom: 14px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--pebble);
+        }
+
+        .room-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--forest);
+        }
+
+        /* GALLERY GRID */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 14px;
+        }
+
+        .gallery-item {
+            height: 140px;
+            border-radius: var(--r-md);
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        /* ENHANCED MAP CARD */
+        .map-card {
+            background: var(--warm-white);
+            border: 1px solid var(--pebble);
+            border-radius: var(--r-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 24px;
+        }
+
+        .map-header {
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--pebble);
+            background: white;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .map-address-info h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--charcoal);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .map-address-info p {
+            font-size: 13px;
+            color: var(--stone);
+            margin-top: 2px;
+        }
+
+        .btn-external-map {
+            background: var(--sand);
+            border: 1.5px solid var(--pebble);
+            color: var(--forest);
+            padding: 8px 16px;
+            border-radius: var(--r-sm);
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .btn-external-map:hover {
+            background: var(--mint);
+            border-color: var(--sage);
+        }
+
+        .map-frame-wrapper {
+            height: 380px;
+            width: 100%;
+            background: var(--mint);
+            position: relative;
+        }
+
+        .map-frame-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* SIDEBAR CARD */
+        .sidebar { position: sticky; top: 90px; }
+
+        .sticky-book-card {
+            background: var(--warm-white);
+            border: 1px solid var(--pebble);
+            border-radius: var(--r-lg);
+            padding: 24px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 24px;
+        }
+
+        .sidebar-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--forest);
+        }
+
+        .sidebar-price small {
+            font-size: 13px;
+            font-family: 'DM Sans', sans-serif;
+            color: var(--stone);
+            font-weight: 400;
+        }
+
+        .info-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .info-list li {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--pebble);
+        }
+
+        .info-list li span:first-child { color: var(--stone); }
+        .info-list li span:last-child { font-weight: 600; color: var(--charcoal); }
+
+        @media (max-width: 900px) {
+            .container { grid-template-columns: 1fr; }
+            .hero-card { height: 380px; }
+            .hero-title { font-size: 30px; }
+            .sidebar { position: static; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <a href="/" class="logo">
+            <div class="logo-mark"><i class="ti ti-building-estate"></i></div>
+            <span>LodgeHub</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="/" class="nav-link">Home</a>
+            <a href="{% url 'profile_page' %}" class="nav-link">My Bookings</a>
+            <div id="nav-auth-section">
+                <a href="{% url 'login_ui' %}" class="btn-ghost">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb-wrap">
+        <div class="breadcrumb">
+            <a href="/">Home</a>
+            <i class="ti ti-chevron-right"></i>
+            <a href="/">Properties</a>
+            <i class="ti ti-chevron-right"></i>
+            <span id="breadcrumbProperty">Loading...</span>
+        </div>
+    </div>
+
+    <!-- HERO SECTION -->
+    <div class="hero-section">
+        <div class="hero-card">
+            <img id="heroImage" src="" alt="Property Cover">
+            <div class="hero-overlay">
+                <div class="hero-badges">
+                    <span class="hero-badge rating" id="heroRating"><i class="ti ti-star-filled"></i> Loading</span>
+                    <span class="hero-badge verified" id="heroVerified"><i class="ti ti-circle-check"></i> Verified Lodge</span>
+                    <span class="hero-badge" id="heroType"><i class="ti ti-building"></i> Hotel</span>
+                </div>
+                <h1 class="hero-title" id="propertyName">Loading Property...</h1>
+                <div class="hero-subtitle">
+                    <i class="ti ti-map-pin"></i> <span id="heroLocation">Location loading...</span>
+                </div>
+
+                <div class="hero-actions">
+                    <div class="price-tag" id="heroPrice">
+                        ₹0 <span>/ night</span>
+                    </div>
+                    <button id="bookNowBtn" class="btn-book-primary">
+                        <i class="ti ti-calendar-event"></i> Book Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <div class="container">
+        <!-- LEFT COLUMN -->
+        <div class="main-column">
+
+            <!-- ABOUT SECTION -->
+            <div class="section-card">
+                <h2 class="section-title"><i class="ti ti-info-circle"></i> About Property</h2>
+                <p class="about-text" id="aboutText">Loading description...</p>
+            </div>
+
+            <!-- AMENITIES -->
+            <div class="section-card">
+                <h2 class="section-title"><i class="ti ti-sparkles"></i> Amenities</h2>
+                <div class="badges-grid" id="amenities">
+                    <span class="tag-pill">Loading amenities...</span>
+                </div>
+            </div>
+
+            <!-- FEATURES -->
+            <div class="section-card">
+                <h2 class="section-title"><i class="ti ti-list-check"></i> Property Features</h2>
+                <div class="badges-grid" id="features">
+                    <span class="tag-pill">Loading features...</span>
+                </div>
+            </div>
+
+            <!-- ROOMS SECTION -->
+            <div class="section-card">
+                <h2 class="section-title"><i class="ti ti-bed"></i> Available Rooms</h2>
+                <div class="room-grid" id="rooms">
+                    <p style="color: var(--stone);">Loading room options...</p>
+                </div>
+            </div>
+
+            <!-- GALLERY SECTION -->
+            <div class="section-card">
+                <h2 class="section-title"><i class="ti ti-photo"></i> Photo Gallery</h2>
+                <div class="gallery-grid" id="gallery">
+                    <p style="color: var(--stone);">Loading photo gallery..</p>
+                </div>
+            </div>
+
+            <!-- ENHANCED MAP SECTION -->
+            <div class="map-card">
+                <div class="map-header">
+                    <div class="map-address-info">
+                        <h4><i class="ti ti-map-pin" style="color: var(--forest);"></i> Property Location</h4>
+                        <p id="mapAddressText">Fetching exact address...</p>
+                    </div>
+                    <a id="externalMapBtn" href="#" target="_blank" class="btn-external-map">
+                        <i class="ti ti-external-link"></i> Open in Google Maps
+                    </a>
+                </div>
+                <div class="map-frame-wrapper">
+                    <iframe id="mapFrame" allowfullscreen loading="lazy"></iframe>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- RIGHT SIDEBAR COLUMN -->
+        <div class="sidebar">
+            <div class="sticky-book-card">
+                <div class="sidebar-price" id="sidebarPrice">
+                    ₹0 <small>/ night</small>
+                </div>
+                <p style="font-size: 13px; color: var(--stone); margin-top: 4px;">Taxes & fees calculated at checkout</p>
+
+                <ul class="info-list">
+                    <li><span>Property Type</span> <span id="infoType">-</span></li>
+                    <li><span>Category</span> <span id="infoCategory">-</span></li>
+                    <li><span>City</span> <span id="infoCity">-</span></li>
+                    <li><span>Host / Owner</span> <span id="infoOwner">-</span></li>
+                </ul>
+
+                <button id="sidebarBookBtn" class="btn-book-primary" style="width: 100%; justify-content: center;">
+                    <i class="ti ti-calendar-check"></i> Reserve Now
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const propertyId = "{{ property_id }}";
+        const API_URL = `/api/properties/${propertyId}/`;
+
+        // Check user session for navbar
+        function updateNavAuth() {
+            const username = localStorage.getItem("username");
+            const navAuth = document.getElementById("nav-auth-section");
+            if (username && navAuth) {
+                navAuth.innerHTML = `
+                    <a href="{% url 'profile_page' %}" class="btn-user">
+                        👤 ${username}
+                    </a>
+                `;
+            }
+        }
+
+        updateNavAuth();
+
+        fetch(API_URL)
+        .then(response => {
+            if (!response.ok) throw new Error("Property fetch failed");
+            return response.json();
+        })
+        .then(property => {
+            console.log("Loaded Property:", property);
+
+            const bookAction = () => {
+                window.location.href = `/book_api/booking/${property.id}/`;
+            };
+
+            document.getElementById("bookNowBtn").addEventListener("click", bookAction);
+            document.getElementById("sidebarBookBtn").addEventListener("click", bookAction);
+
+            // Populate Hero Info
+            if (property.images?.[0]?.image) {
+                document.getElementById("heroImage").src = property.images[0].image;
+            }
+            document.getElementById("propertyName").innerText = property.name || "Lodge Property";
+            document.getElementById("breadcrumbProperty").innerText = property.name || "Property Details";
+            document.getElementById("heroLocation").innerText = `${property.location || ''}, ${property.city || ''}`;
+            document.getElementById("aboutText").innerText = property.description || "No description provided.";
+            document.getElementById("heroRating").innerHTML = `<i class="ti ti-star-filled"></i> ${property.rating || '4.5'}`;
+            document.getElementById("heroType").innerText = property.property_type || "Lodge";
+            document.getElementById("heroPrice").innerHTML = `₹${property.price_per_night || 0} <span>/ night</span>`;
+            document.getElementById("sidebarPrice").innerHTML = `₹${property.price_per_night || 0} <small>/ night</small>`;
+
+            // Populate Sidebar Specs
+            document.getElementById("infoType").innerText = property.property_type || "-";
+            document.getElementById("infoCategory").innerText = property.category || "-";
+            document.getElementById("infoCity").innerText = property.city || "-";
+            document.getElementById("infoOwner").innerText = property.owner || "LodgeHub Host";
+
+            // Populate Amenities
+            let amenityHTML = "";
+            (property.amenities || []).forEach(item => {
+                amenityHTML += `
+                    <span class="tag-pill">
+                        <i class="ti ti-circle-check"></i> ${item.name}
+                    </span>
+                `;
+            });
+            document.getElementById("amenities").innerHTML = amenityHTML || "<p>No specific amenities listed.</p>";
+
+            // Populate Features
+            let featureHTML = "";
+            (property.features || []).forEach(item => {
+                featureHTML += `
+                    <span class="tag-pill">
+                        <i class="ti ti-sparkles"></i> ${item.name}
+                    </span>
+                `;
+            });
+            document.getElementById("features").innerHTML = featureHTML || "<p>No specific features listed.</p>";
+
+            // Populate Rooms
+            let roomHTML = "";
+            (property.rooms || []).forEach(room => {
+                const roomImg = room.images?.[0]?.image || property.images?.[0]?.image || '';
+                roomHTML += `
+                    <div class="room-card">
+                        <img class="room-img" src="${roomImg}" alt="${room.room_name}">
+                        <div class="room-body">
+                            <div class="room-name">${room.room_name}</div>
+                            <div class="room-desc">${room.description || 'Comfortable stay equipped with modern facilities.'}</div>
+                            <div class="room-meta">
+                                <span><i class="ti ti-users"></i> ${room.capacity} Guests</span>
+                                <span><i class="ti ti-door"></i> ${room.total_rooms} Rooms</span>
+                            </div>
+                            <div style="display: flex; align-items: center; justify-content: space-between;">
+                                <div class="room-price">₹${room.price_per_night}</div>
+                                <button class="btn-ghost" style="padding: 6px 12px; font-size: 12px;" onclick="window.location.href='/book_api/booking/${property.id}/'">
+                                    Book Room
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            document.getElementById("rooms").innerHTML = roomHTML || "<p>No rooms available at the moment.</p>";
+
+            // Populate Gallery
+            let galleryHTML = "";
+            (property.images || []).forEach(img => {
+                galleryHTML += `
+                    <div class="gallery-item">
+                        <img src="${img.image}" alt="Property Photo">
+                    </div>
+                `;
+            });
+            document.getElementById("gallery").innerHTML = galleryHTML || "<p>No photos available.</p>";
+
+            // ENHANCED MAP LOGIC & FALLBACK GEOCODING
+            const fullAddress = `${property.address || ''}, ${property.location || ''}, ${property.city || ''}`.replace(/^, /, '').trim();
+            document.getElementById("mapAddressText").innerText = fullAddress || `${property.city || 'India'}`;
+
+            let embedUrl = "";
+            let externalUrl = "";
+
+            if (property.latitude && property.longitude && property.latitude !== "0" && property.longitude !== "0") {
+                embedUrl = `https://maps.google.com/maps?q=${property.latitude},${property.longitude}&z=15&output=embed`;
+                externalUrl = `https://www.google.com/maps/search/?api=1&query=${property.latitude},${property.longitude}`;
+            } else {
+                const queryStr = encodeURIComponent(fullAddress || `${property.city || 'India'}, India`);
+                embedUrl = `https://maps.google.com/maps?q=${queryStr}&z=14&output=embed`;
+                externalUrl = `https://www.google.com/maps/search/?api=1&query=${queryStr}`;
+            }
+
+            document.getElementById("mapFrame").src = embedUrl;
+            document.getElementById("externalMapBtn").href = externalUrl;
+        })
+        .catch(error => {
+            console.error("Property fetch error:", error);
+            document.getElementById("propertyName").innerText = "Property Details";
+            document.getElementById("aboutText").innerText = "Unable to load property details. Please try again later.";
+        });
+    </script>
+</body>
+</html>

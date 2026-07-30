@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f5f7fb; margin: 0; padding: 40px; }
+        .card { max-width: 700px; margin: 0 auto; background: white; border-radius: 12px; padding: 30px; box-shadow: 0 8px 25px rgba(0,0,0,0.08); }
+        h1 { margin-top: 0; }
+        .info { margin-top: 20px; line-height: 1.6; }
+        .btn { margin-top: 25px; padding: 12px 18px; border: none; border-radius: 8px; background: #2563eb; color: white; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Payment</h1>
+        <p>Your booking is ready. Please complete the payment to confirm your reservation.</p>
+        <div class="info" id="bookingInfo">Loading booking details...</div>
+        <button class="btn" onclick="window.location.href='/'">Go to Home</button>
+    </div>
+
+    <script>
+        const bookingData = JSON.parse(localStorage.getItem('booking') || '{}');
+        const info = document.getElementById('bookingInfo');
+
+        if (bookingData && bookingData.booking) {
+            const b = bookingData.booking;
+            info.innerHTML = `
+                <strong>Property:</strong> ${bookingData.property?.name || '-'}<br>
+                <strong>Room:</strong> ${bookingData.room?.name || '-'}<br>
+                <strong>Check In:</strong> ${b.check_in || '-'}<br>
+                <strong>Check Out:</strong> ${b.check_out || '-'}<br>
+                <strong>Guests:</strong> ${b.guests || '-'}<br>
+                <strong>Total:</strong> ₹${bookingData.total || 0}
+            `;
+        } else {
+            info.innerHTML = 'No booking details found.';
+        }
+    </script>
+</body>
+</html>
