@@ -29,3 +29,4 @@ jobs:
       - name: Push Docker Image
         run: |
           docker push pramodsadekar1718/lodgehub:latest
+          
