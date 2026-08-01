@@ -274,8 +274,23 @@
             margin: 0 auto 60px;
             padding: 0 24px;
             display: grid;
-            grid-template-columns: 2.2fr 1fr;
+            grid-template-columns: 1fr;
             gap: 32px;
+        }
+
+        .reserve-panel {
+            max-width: 1200px;
+            margin: 0 auto 32px;
+            padding: 0 24px;
+        }
+
+        .sticky-book-card {
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+            position: relative;
+            top: 0;
+            box-shadow: var(--shadow-md);
         }
 
         .section-card {
@@ -474,8 +489,8 @@
             border: none;
         }
 
-        /* SIDEBAR CARD */
-        .sidebar { position: sticky; top: 90px; }
+        /* RESERVE CARD */
+        .sidebar { position: static; }
 
         .sticky-book-card {
             background: var(--warm-white);
@@ -580,6 +595,27 @@
         </div>
     </div>
 
+    <!-- RESERVE PANEL -->
+    <div class="reserve-panel">
+        <div class="sticky-book-card">
+            <div class="sidebar-price" id="sidebarPrice">
+                ₹0 <small>/ night</small>
+            </div>
+            <p style="font-size: 13px; color: var(--stone); margin-top: 4px;">Taxes & fees calculated at checkout</p>
+
+            <ul class="info-list">
+                <li><span>Property Type</span> <span id="infoType">-</span></li>
+                <li><span>Category</span> <span id="infoCategory">-</span></li>
+                <li><span>City</span> <span id="infoCity">-</span></li>
+                <li><span>Host / Owner</span> <span id="infoOwner">-</span></li>
+            </ul>
+
+            <button id="sidebarBookBtn" class="btn-book-primary" style="width: 100%; justify-content: center;">
+                <i class="ti ti-calendar-check"></i> Reserve Now
+            </button>
+        </div>
+    </div>
+
     <!-- MAIN CONTENT CONTAINER -->
     <div class="container">
         <!-- LEFT COLUMN -->
@@ -641,26 +677,6 @@
 
         </div>
 
-        <!-- RIGHT SIDEBAR COLUMN -->
-        <div class="sidebar">
-            <div class="sticky-book-card">
-                <div class="sidebar-price" id="sidebarPrice">
-                    ₹0 <small>/ night</small>
-                </div>
-                <p style="font-size: 13px; color: var(--stone); margin-top: 4px;">Taxes & fees calculated at checkout</p>
-
-                <ul class="info-list">
-                    <li><span>Property Type</span> <span id="infoType">-</span></li>
-                    <li><span>Category</span> <span id="infoCategory">-</span></li>
-                    <li><span>City</span> <span id="infoCity">-</span></li>
-                    <li><span>Host / Owner</span> <span id="infoOwner">-</span></li>
-                </ul>
-
-                <button id="sidebarBookBtn" class="btn-book-primary" style="width: 100%; justify-content: center;">
-                    <i class="ti ti-calendar-check"></i> Reserve Now
-                </button>
-            </div>
-        </div>
     </div>
 
     <script>
