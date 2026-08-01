@@ -280,122 +280,17 @@
       justify-self: end;
     }
 
-    .plan-trip-section {
-      display: none;
-      padding: 40px 48px;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .plan-trip-section.active {
-      display: block;
-    }
-
-    .plan-trip-card {
-      background: #fff;
-      border-radius: var(--r-xl);
-      box-shadow: var(--shadow-md);
-      padding: 28px;
-      display: grid;
-      gap: 18px;
-    }
-
-    .plan-trip-card h2 {
-      margin-bottom: 4px;
-      font-size: 28px;
-      color: var(--forest);
-    }
-
-    .plan-trip-card p {
-      color: var(--stone);
-      max-width: 720px;
-      line-height: 1.7;
-      margin-bottom: 16px;
-    }
-
-    .plan-trip-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .plan-trip-grid-full {
-      grid-column: 1 / -1;
-    }
-
-    .plan-trip-field {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .plan-trip-field label {
-      color: var(--stone);
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    .plan-trip-field input,
-    .plan-trip-field select,
-    .plan-trip-field textarea {
-      border: 1px solid var(--pebble);
-      border-radius: var(--r-sm);
-      padding: 12px 14px;
-      font-size: 14px;
-      color: var(--charcoal);
-      background: #fff;
-      width: 100%;
-    }
-
-    .plan-trip-field textarea {
-      min-height: 112px;
-      resize: vertical;
-    }
-
-    .plan-trip-success-page {
-      background: #ECFDF5;
-      border: 1px solid #A7F3D0;
-      padding: 20px 22px;
-      border-radius: 16px;
-      display: grid;
-      gap: 12px;
-      color: #065F46;
-    }
-
-    .plan-trip-summary {
-      display: grid;
-      gap: 10px;
-      font-size: 14px;
-      color: #134E4A;
-      line-height: 1.6;
-    }
-
-    .plan-trip-summary div {
-      display: grid;
-      grid-template-columns: 140px 1fr;
-      gap: 8px;
-    }
-
-    .plan-trip-actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
+    .hero-phone-highlight {
+      display: inline-flex;
       align-items: center;
-    }
-
-    .plan-trip-success {
-      display: none;
-      border: 1px solid var(--sage);
-      background: #ecfdf5;
-      padding: 16px 18px;
-      border-radius: var(--r-lg);
-      color: #166534;
-      font-weight: 600;
-    }
-
-    .plan-trip-success strong {
-      display: block;
-      margin-bottom: 6px;
+      padding: 16px 20px;
+      border-radius: 16px;
+      background: rgba(64, 145, 108, 0.12);
+      border: 1px solid rgba(64, 145, 108, 0.24);
+      color: var(--mint);
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 22px;
     }
 
     @media (max-width: 900px) {
@@ -1348,6 +1243,7 @@
         <h3>Plan Your Trip With Us</h3>
         <p class="small-block-subheading">Everything you need for your perfect trip.</p>
         <p>We take care of your stay, travel, meals, sightseeing, and activities—so you can enjoy a stress-free journey.</p>
+        <div class="hero-phone-highlight">Need help now? Call <strong>9156620538</strong></div>
         <ul class="hero-feature-list">
           <li>✈️ Travel & Transportation</li>
           <li>🏨 Hotel & Stay Booking</li>
@@ -1358,108 +1254,8 @@
           <li>👨‍👩‍👧 Family, Couple & Group Packages</li>
           <li>💰 Budget-Friendly Plans</li>
         </ul>
-        <button class="btn-primary hero-cta" type="button" onclick="showPlanTripForm()">Plan Your Trip</button>
+        <a class="btn-primary hero-cta" href="{% url 'plan_trip_form' %}">Plan Your Trip</a>
       </div>
-    </div>
-  </section>
-
-  <section class="plan-trip-section" id="plan-trip-section" aria-label="Plan your trip request">
-    <div class="plan-trip-card">
-      <div>
-        <h2>Plan Your Trip Request</h2>
-        <p>Share your travel details and our expert team will prepare a custom itinerary with the best stay, travel, and activity options.</p>
-      </div>
-
-      <div class="plan-trip-success-page" id="plan-trip-success-page" role="status" aria-live="polite" style="display:none;">
-        <strong>Thank you!</strong>
-        <p>Your request has been received. Our experts will contact you soon.</p>
-        <div class="plan-trip-summary">
-          <div><strong>Starting Location:</strong> <span id="summary-starting-location"></span></div>
-          <div><strong>Destination:</strong> <span id="summary-destination"></span></div>
-          <div><strong>Departure Date:</strong> <span id="summary-departure-date"></span></div>
-          <div><strong>Duration:</strong> <span id="summary-duration"></span></div>
-          <div><strong>Travelers:</strong> <span id="summary-travelers"></span></div>
-          <div><strong>Group Type:</strong> <span id="summary-group-type"></span></div>
-          <div><strong>Travel Mode:</strong> <span id="summary-travel-mode"></span></div>
-          <div><strong>Budget:</strong> <span id="summary-budget"></span></div>
-          <div><strong>Trip Leader:</strong> <span id="summary-leader-name"></span></div>
-          <div><strong>Mobile Number:</strong> <span id="summary-leader-phone"></span></div>
-          <div><strong>Notes:</strong> <span id="summary-notes"></span></div>
-        </div>
-        <button type="button" class="btn-ghost" onclick="showPlanTripForm()">Submit another request</button>
-      </div>
-
-      <form id="plan-trip-form" class="plan-trip-grid" style="display:none;">
-        <div class="plan-trip-field">
-          <label for="starting-location">Starting Location *</label>
-          <input id="starting-location" name="starting_location" type="text" placeholder="City or town" required>
-        </div>
-        <div class="plan-trip-field">
-          <label for="destination">Destination *</label>
-          <input id="destination" name="destination" type="text" placeholder="City or tourist spot" required>
-        </div>
-        <div class="plan-trip-field">
-          <label for="departure-date">Departure Date *</label>
-          <input id="departure-date" name="departure_date" type="date" required>
-        </div>
-        <div class="plan-trip-field">
-          <label for="travelers">Number of Travelers *</label>
-          <input id="travelers" name="travelers" type="number" min="1" placeholder="Total persons" required>
-        </div>
-        <div class="plan-trip-field">
-          <label for="duration-days">Trip Duration (Days) *</label>
-          <input id="duration-days" name="duration_days" type="number" min="1" placeholder="Days" required>
-        </div>
-        <div class="plan-trip-field">
-          <label for="duration-nights">Trip Duration (Nights) *</label>
-          <input id="duration-nights" name="duration_nights" type="number" min="0" placeholder="Nights" required>
-        </div>
-        <div class="plan-trip-field">
-          <label for="group-type">Group Type *</label>
-          <select id="group-type" name="group_type" required>
-            <option value="">Select group type</option>
-            <option value="solo">Solo</option>
-            <option value="couple">Couple</option>
-            <option value="family">Family</option>
-            <option value="boys">Boys Group</option>
-            <option value="girls">Girls Group</option>
-            <option value="mixed">Mixed Group</option>
-            <option value="corporate">Corporate Group</option>
-          </select>
-        </div>
-        <div class="plan-trip-field">
-          <label for="travel-mode">Preferred Travel Mode *</label>
-          <select id="travel-mode" name="travel_mode" required>
-            <option value="">Select travel mode</option>
-            <option value="bus">Bus</option>
-            <option value="train">Train</option>
-            <option value="flight">Flight</option>
-            <option value="lodgehub_car">LodgeHub Car Service</option>
-            <option value="private_bus">Private Travels</option>
-            <option value="self_drive">Self Drive</option>
-          </select>
-        </div>
-        <div class="plan-trip-field plan-trip-grid-full">
-          <label for="budget">Approximate Budget (Optional)</label>
-          <input id="budget" name="budget" type="text" placeholder="₹ per person or total budget">
-        </div>
-        <div class="plan-trip-field">
-          <label for="leader-name">Trip Leader Name *</label>
-          <input id="leader-name" name="leader_name" type="text" placeholder="Full name" required>
-        </div>
-        <div class="plan-trip-field">
-          <label for="leader-phone">Mobile Number *</label>
-          <input id="leader-phone" name="leader_phone" type="tel" placeholder="Mobile number" required>
-        </div>
-        <div class="plan-trip-field plan-trip-grid-full">
-          <label for="notes">Additional Notes (Optional)</label>
-          <textarea id="notes" name="notes" placeholder="Need pickup from Pune Railway Station, want adventure activities, need vegetarian meals"></textarea>
-        </div>
-        <div class="plan-trip-field plan-trip-grid-full plan-trip-actions">
-          <button type="submit" class="btn-primary">📞 Request Trip Plan</button>
-          <span style="color: var(--stone); font-size: 13px;">A travel expert will contact you shortly.</span>
-        </div>
-      </form>
     </div>
   </section>
 
@@ -1761,112 +1557,6 @@
         console.error("Failed to load properties:", error);
         showToast("Could not load properties");
       }
-
-      const planTripForm = document.getElementById('plan-trip-form');
-      if (planTripForm) {
-        planTripForm.addEventListener('submit', async function (event) {
-          event.preventDefault();
-          await submitPlanTripRequest();
-        });
-      }
-
-      async function submitPlanTripRequest() {
-        const form = document.getElementById('plan-trip-form');
-        const successPage = document.getElementById('plan-trip-success-page');
-        const apiUrl = `${window.location.origin}/api/plan-trip/`;
-
-        const formData = {
-          starting_location: document.getElementById('starting-location').value,
-          destination: document.getElementById('destination').value,
-          departure_date: document.getElementById('departure-date').value,
-          duration_days: Number(document.getElementById('duration-days').value),
-          duration_nights: Number(document.getElementById('duration-nights').value),
-          travelers: Number(document.getElementById('travelers').value),
-          group_type: document.getElementById('group-type').value,
-          travel_mode: document.getElementById('travel-mode').value,
-          budget: document.getElementById('budget').value,
-          leader_name: document.getElementById('leader-name').value,
-          leader_phone: document.getElementById('leader-phone').value,
-          notes: document.getElementById('notes').value,
-        };
-
-        try {
-          const response = await fetch(apiUrl, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-          });
-
-          if (!response.ok) {
-            let errorMessage = 'Could not submit trip request.';
-            try {
-              const errorData = await response.json();
-              errorMessage = errorData.detail || errorData.message || errorData.error || errorMessage;
-            } catch (jsonError) {
-              const text = await response.text();
-              if (text) {
-                errorMessage = text;
-              }
-            }
-            console.error('Plan trip request failed:', response.status, errorMessage);
-            showToast(errorMessage);
-            return;
-          }
-
-          const result = await response.json();
-          form.reset();
-          showPlanTripSuccess(formData);
-          showToast(result.message || 'Trip request submitted successfully');
-        } catch (error) {
-          console.error('Plan trip request failed:', error);
-          showToast(`Unable to submit trip request right now: ${error.message}`);
-        }
-      }
-    }
-
-    function showPlanTripForm() {
-      const section = document.getElementById('plan-trip-section');
-      const form = document.getElementById('plan-trip-form');
-      const successPage = document.getElementById('plan-trip-success-page');
-      if (section) {
-        section.classList.add('active');
-      }
-      if (form) {
-        form.style.display = 'grid';
-      }
-      if (successPage) {
-        successPage.style.display = 'none';
-      }
-      window.scrollTo({ top: section.offsetTop - 80, behavior: 'smooth' });
-    }
-
-    function showPlanTripSuccess(values) {
-      const section = document.getElementById('plan-trip-section');
-      const form = document.getElementById('plan-trip-form');
-      const successPage = document.getElementById('plan-trip-success-page');
-      if (form) {
-        form.style.display = 'none';
-      }
-      if (successPage) {
-        document.getElementById('summary-starting-location').textContent = values.starting_location || '-';
-        document.getElementById('summary-destination').textContent = values.destination || '-';
-        document.getElementById('summary-departure-date').textContent = values.departure_date || '-';
-        document.getElementById('summary-duration').textContent = `${values.duration_days || 0} days, ${values.duration_nights || 0} nights`;
-        document.getElementById('summary-travelers').textContent = values.travelers || '-';
-        document.getElementById('summary-group-type').textContent = values.group_type || '-';
-        document.getElementById('summary-travel-mode').textContent = values.travel_mode || '-';
-        document.getElementById('summary-budget').textContent = values.budget || 'Not specified';
-        document.getElementById('summary-leader-name').textContent = values.leader_name || '-';
-        document.getElementById('summary-leader-phone').textContent = values.leader_phone || '-';
-        document.getElementById('summary-notes').textContent = values.notes || 'None';
-        successPage.style.display = 'grid';
-      }
-      if (section) {
-        section.classList.add('active');
-      }
-      window.scrollTo({ top: successPage.offsetTop - 100, behavior: 'smooth' });
     }
 
     function loadCityDropdown() {

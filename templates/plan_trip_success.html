@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trip Request Sent — LodgeHub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --forest: #1B4332;
+      --sage: #40916C;
+      --sand: #F8F5F0;
+      --warm-white: #FDFCFB;
+      --charcoal: #1C1917;
+      --stone: #78716C;
+      --pebble: #D6D3D1;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, .06), 0 1px 2px rgba(0, 0, 0, .04);
+      --r-sm: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'DM Sans', sans-serif;
+      background: var(--sand);
+      color: var(--charcoal);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 32px;
+      background: #fff;
+      border-bottom: 1px solid var(--pebble);
+    }
+
+    .logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      color: var(--forest);
+      letter-spacing: -0.5px;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 40px 24px 56px;
+    }
+
+    .success-card {
+      background: #fff;
+      border-radius: 24px;
+      box-shadow: var(--shadow-sm);
+      padding: 38px;
+      display: grid;
+      gap: 24px;
+    }
+
+    .success-card h1 {
+      margin: 0;
+      font-size: 2.2rem;
+      color: var(--forest);
+    }
+
+    .success-card p {
+      margin: 0;
+      color: var(--stone);
+      line-height: 1.8;
+    }
+
+    .phone-highlight {
+      display: inline-flex;
+      padding: 12px 18px;
+      border-radius: 14px;
+      background: rgba(64, 145, 108, .12);
+      border: 1px solid rgba(64, 145, 108, .2);
+      color: var(--forest);
+      font-weight: 700;
+      margin-top: 12px;
+    }
+
+    .plan-trip-summary {
+      display: grid;
+      gap: 12px;
+      padding: 24px;
+      background: #f7f7f7;
+      border-radius: 18px;
+    }
+
+    .plan-trip-summary div {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 16px;
+    }
+
+    .btn-primary {
+      width: fit-content;
+      background: var(--forest);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 14px 24px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    @media (max-width: 720px) {
+      .plan-trip-summary div {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="navbar">
+    <a href="{% url 'home' %}" class="logo-text">LodgeHub</a>
+    <a href="{% url 'plan_trip_form' %}" class="btn-primary">Submit another request</a>
+  </header>
+
+  <main class="page">
+    <section class="success-card">
+      <h1>Trip request received</h1>
+      <p>Thank you for submitting your travel details. Our expert team will contact you shortly to finalize your itinerary.</p>
+      <div class="phone-highlight">If you need faster support, call us at <strong>9156620538</strong></div>
+
+      <div class="plan-trip-summary" id="plan-trip-summary">
+        <div><strong>Starting Location:</strong><span id="summary-starting-location">-</span></div>
+        <div><strong>Destination:</strong><span id="summary-destination">-</span></div>
+        <div><strong>Departure Date:</strong><span id="summary-departure-date">-</span></div>
+        <div><strong>Duration:</strong><span id="summary-duration">-</span></div>
+        <div><strong>Travelers:</strong><span id="summary-travelers">-</span></div>
+        <div><strong>Group Type:</strong><span id="summary-group-type">-</span></div>
+        <div><strong>Travel Mode:</strong><span id="summary-travel-mode">-</span></div>
+        <div><strong>Budget:</strong><span id="summary-budget">-</span></div>
+        <div><strong>Trip Leader:</strong><span id="summary-leader-name">-</span></div>
+        <div><strong>Mobile Number:</strong><span id="summary-leader-phone">-</span></div>
+        <div><strong>Notes:</strong><span id="summary-notes">-</span></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const stored = localStorage.getItem('planTripRequest');
+    if (stored) {
+      const values = JSON.parse(stored);
+      document.getElementById('summary-starting-location').textContent = values.starting_location || '-';
+      document.getElementById('summary-destination').textContent = values.destination || '-';
+      document.getElementById('summary-departure-date').textContent = values.departure_date || '-';
+      document.getElementById('summary-duration').textContent = `${values.duration_days || 0} days, ${values.duration_nights || 0} nights`;
+      document.getElementById('summary-travelers').textContent = values.travelers || '-';
+      document.getElementById('summary-group-type').textContent = values.group_type || '-';
+      document.getElementById('summary-travel-mode').textContent = values.travel_mode || '-';
+      document.getElementById('summary-budget').textContent = values.budget || 'Not specified';
+      document.getElementById('summary-leader-name').textContent = values.leader_name || '-';
+      document.getElementById('summary-leader-phone').textContent = values.leader_phone || '-';
+      document.getElementById('summary-notes').textContent = values.notes || 'None';
+      localStorage.removeItem('planTripRequest');
+    } else {
+      document.getElementById('plan-trip-summary').innerHTML = '<p>No submitted trip data was found. If you are here by accident, please go back and submit your request.</p>';
+    }
+  </script>
+</body>
+</html>

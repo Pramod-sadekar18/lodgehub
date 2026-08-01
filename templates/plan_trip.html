@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plan Your Trip — LodgeHub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --forest: #1B4332;
+      --sage: #40916C;
+      --mint: #D8F3DC;
+      --sand: #F8F5F0;
+      --warm-white: #FDFCFB;
+      --charcoal: #1C1917;
+      --stone: #78716C;
+      --pebble: #D6D3D1;
+      --amber: #B45309;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, .06), 0 1px 2px rgba(0, 0, 0, .04);
+      --r-sm: 8px;
+      --r-md: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'DM Sans', sans-serif;
+      background: var(--sand);
+      color: var(--charcoal);
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 32px;
+      background: #fff;
+      border-bottom: 1px solid var(--pebble);
+    }
+
+    .logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      color: var(--forest);
+      letter-spacing: -0.5px;
+    }
+
+    .hero {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 40px 24px 28px;
+      display: grid;
+      gap: 24px;
+    }
+
+    .hero-top {
+      background: #fff;
+      border-radius: 24px;
+      padding: 36px;
+      box-shadow: var(--shadow-sm);
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      color: var(--sage);
+    }
+
+    .hero-title {
+      font-size: clamp(2rem, 2.6vw, 3.5rem);
+      line-height: 1.05;
+      color: var(--forest);
+      margin: 0;
+    }
+
+    .hero-copy {
+      max-width: 720px;
+      color: var(--stone);
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    .hero-phone {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 22px;
+      border-radius: 14px;
+      background: rgba(64, 145, 108, .1);
+      color: var(--forest);
+      font-size: 1.1rem;
+      font-weight: 700;
+      border: 1px solid rgba(64, 145, 108, .2);
+      width: fit-content;
+    }
+
+    .plan-trip-card {
+      background: #fff;
+      border-radius: 24px;
+      box-shadow: var(--shadow-sm);
+      padding: 32px;
+      max-width: 980px;
+      margin: 0 auto 64px;
+    }
+
+    .plan-trip-card h2 {
+      margin: 0 0 12px;
+      font-size: 1.75rem;
+      color: var(--forest);
+    }
+
+    .plan-trip-card p {
+      margin: 0 0 28px;
+      color: var(--stone);
+    }
+
+    .plan-trip-grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .plan-trip-field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .plan-trip-field label {
+      font-size: .92rem;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+
+    .plan-trip-field input,
+    .plan-trip-field select,
+    .plan-trip-field textarea {
+      width: 100%;
+      border: 1px solid var(--pebble);
+      border-radius: 12px;
+      padding: 14px 16px;
+      font: inherit;
+      color: var(--charcoal);
+      background: #fff;
+    }
+
+    .plan-trip-field textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .plan-trip-grid-full {
+      grid-column: 1 / -1;
+    }
+
+    .plan-trip-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn-primary {
+      background: var(--forest);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 14px 24px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .success-note {
+      margin-top: 12px;
+      color: var(--stone);
+      font-size: .95rem;
+    }
+
+    .plan-trip-summary {
+      display: grid;
+      gap: 12px;
+      margin-top: 28px;
+      padding: 22px;
+      border: 1px solid var(--pebble);
+      border-radius: 16px;
+      background: #f7f7f7;
+    }
+
+    .plan-trip-summary div {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 16px;
+      color: var(--charcoal);
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: 28px 18px 24px;
+      }
+      .plan-trip-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="navbar">
+    <a href="{% url 'home' %}" class="logo-text">LodgeHub</a>
+    <a href="{% url 'home' %}" class="btn-ghost">Back to home</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-top">
+        <span class="hero-eyebrow">Trip Planning</span>
+        <h1 class="hero-title">Share your travel details and let our experts plan your perfect trip.</h1>
+        <p class="hero-copy">From stay and transport to meals and activities, LodgeHub handles the details so you can relax.</p>
+        <div class="hero-phone">Call us now: <strong>9156620538</strong></div>
+      </div>
+    </section>
+
+    <section class="plan-trip-card">
+      <div>
+        <h2>Request your trip plan</h2>
+        <p>Fill in your destination, dates and traveler details. Our travel experts will reach out soon.</p>
+      </div>
+
+      <form id="plan-trip-form" class="plan-trip-grid">
+        <div class="plan-trip-field">
+          <label for="starting-location">Starting Location *</label>
+          <input id="starting-location" name="starting_location" type="text" placeholder="City or town" required>
+        </div>
+        <div class="plan-trip-field">
+          <label for="destination">Destination *</label>
+          <input id="destination" name="destination" type="text" placeholder="City or tourist spot" required>
+        </div>
+        <div class="plan-trip-field">
+          <label for="departure-date">Departure Date *</label>
+          <input id="departure-date" name="departure_date" type="date" required>
+        </div>
+        <div class="plan-trip-field">
+          <label for="travelers">Number of Travelers *</label>
+          <input id="travelers" name="travelers" type="number" min="1" placeholder="Total persons" required>
+        </div>
+        <div class="plan-trip-field">
+          <label for="duration-days">Trip Duration (Days) *</label>
+          <input id="duration-days" name="duration_days" type="number" min="1" placeholder="Days" required>
+        </div>
+        <div class="plan-trip-field">
+          <label for="duration-nights">Trip Duration (Nights) *</label>
+          <input id="duration-nights" name="duration_nights" type="number" min="0" placeholder="Nights" required>
+        </div>
+        <div class="plan-trip-field">
+          <label for="group-type">Group Type *</label>
+          <select id="group-type" name="group_type" required>
+            <option value="">Select group type</option>
+            <option value="solo">Solo</option>
+            <option value="couple">Couple</option>
+            <option value="family">Family</option>
+            <option value="boys">Boys Group</option>
+            <option value="girls">Girls Group</option>
+            <option value="mixed">Mixed Group</option>
+            <option value="corporate">Corporate Group</option>
+          </select>
+        </div>
+        <div class="plan-trip-field">
+          <label for="travel-mode">Preferred Travel Mode *</label>
+          <select id="travel-mode" name="travel_mode" required>
+            <option value="">Select travel mode</option>
+            <option value="bus">Bus</option>
+            <option value="train">Train</option>
+            <option value="flight">Flight</option>
+            <option value="lodgehub_car">LodgeHub Car Service</option>
+            <option value="private_bus">Private Travels</option>
+            <option value="self_drive">Self Drive</option>
+          </select>
+        </div>
+        <div class="plan-trip-field plan-trip-grid-full">
+          <label for="budget">Approximate Budget</label>
+          <input id="budget" name="budget" type="text" placeholder="₹ per person or total budget">
+        </div>
+        <div class="plan-trip-field">
+          <label for="leader-name">Trip Leader Name *</label>
+          <input id="leader-name" name="leader_name" type="text" placeholder="Full name" required>
+        </div>
+        <div class="plan-trip-field">
+          <label for="leader-phone">Mobile Number *</label>
+          <input id="leader-phone" name="leader_phone" type="tel" placeholder="Mobile number" required>
+        </div>
+        <div class="plan-trip-field plan-trip-grid-full">
+          <label for="notes">Additional Notes</label>
+          <textarea id="notes" name="notes" placeholder="Need pickup, preferred hotel style, etc."></textarea>
+        </div>
+        <div class="plan-trip-field plan-trip-grid-full plan-trip-actions">
+          <button type="submit" class="btn-primary">Submit request</button>
+          <span class="success-note">A travel expert will contact you soon.</span>
+        </div>
+        <div id="form-message" class="success-note"></div>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    async function submitPlanTripRequest(event) {
+      event.preventDefault();
+
+      const formData = {
+        starting_location: document.getElementById('starting-location').value,
+        destination: document.getElementById('destination').value,
+        departure_date: document.getElementById('departure-date').value,
+        duration_days: Number(document.getElementById('duration-days').value),
+        duration_nights: Number(document.getElementById('duration-nights').value),
+        travelers: Number(document.getElementById('travelers').value),
+        group_type: document.getElementById('group-type').value,
+        travel_mode: document.getElementById('travel-mode').value,
+        budget: document.getElementById('budget').value,
+        leader_name: document.getElementById('leader-name').value,
+        leader_phone: document.getElementById('leader-phone').value,
+        notes: document.getElementById('notes').value,
+      };
+
+      const message = document.getElementById('form-message');
+      message.textContent = '';
+
+      try {
+        const response = await fetch(`${window.location.origin}/api/plan-trip/`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+
+        if (!response.ok) {
+          let errorText = 'Unable to submit request. Please try again.';
+          try {
+            const errorData = await response.json();
+            errorText = errorData.detail || errorData.message || JSON.stringify(errorData);
+          } catch (error) {
+            errorText = await response.text();
+          }
+          message.textContent = errorText;
+          return;
+        }
+
+        localStorage.setItem('planTripRequest', JSON.stringify(formData));
+        window.location.href = "{% url 'plan_trip_success' %}";
+      } catch (error) {
+        message.textContent = `Submission failed: ${error.message}`;
+      }
+    }
+
+    document.getElementById('plan-trip-form').addEventListener('submit', submitPlanTripRequest);
+  </script>
+</body>
+</html>
