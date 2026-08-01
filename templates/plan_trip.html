@@ -144,7 +144,7 @@
       border-radius: 24px;
       box-shadow: var(--shadow-sm);
       padding: 32px;
-      max-width: 980px;
+      max-width: 1100px;
       margin: 0 auto 64px;
     }
 
@@ -159,10 +159,72 @@
       color: var(--stone);
     }
 
-    .plan-trip-grid {
+    .plan-trip-card-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(280px, 380px);
+      gap: 28px;
+      align-items: start;
+      margin-top: 20px;
+    }
+
+    .plan-trip-main {
       display: grid;
       gap: 18px;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .plan-trip-side {
+      background: linear-gradient(180deg, rgba(64, 145, 108, .16) 0%, rgba(56, 125, 91, .1) 100%);
+      border: 1px solid rgba(64, 145, 108, .18);
+      border-radius: 24px;
+      padding: 28px 26px;
+      color: #12422d;
+      display: grid;
+      gap: 18px;
+      min-height: 420px;
+    }
+
+    .plan-trip-side h3 {
+      margin: 0;
+      font-size: 1.35rem;
+      color: var(--forest);
+    }
+
+    .plan-trip-side p {
+      margin: 0;
+      color: #274c3d;
+      line-height: 1.7;
+    }
+
+    .plan-trip-feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .plan-trip-feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      color: #1f4333;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    .plan-trip-feature-list li::before {
+      content: '✔';
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: #1b4332;
+      color: #fff;
+      font-size: 14px;
+      flex-shrink: 0;
+      margin-top: 4px;
     }
 
     .plan-trip-field {
@@ -181,16 +243,31 @@
     .plan-trip-field textarea {
       width: 100%;
       border: 1px solid var(--pebble);
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 14px 16px;
       font: inherit;
       color: var(--charcoal);
       background: #fff;
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    .plan-trip-field input:focus,
+    .plan-trip-field select:focus,
+    .plan-trip-field textarea:focus {
+      outline: none;
+      border-color: var(--sage);
+      box-shadow: 0 0 0 4px rgba(64, 145, 108, .12);
     }
 
     .plan-trip-field textarea {
-      min-height: 120px;
+      min-height: 130px;
       resize: vertical;
+    }
+
+    .plan-trip-grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .plan-trip-grid-full {
@@ -209,11 +286,17 @@
       background: var(--forest);
       color: #fff;
       border: none;
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 14px 24px;
       font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
+      transition: transform .2s, background .2s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      background: var(--sage);
     }
 
     .success-note {
@@ -222,21 +305,44 @@
       font-size: .95rem;
     }
 
-    .plan-trip-summary {
-      display: grid;
-      gap: 12px;
-      margin-top: 28px;
-      padding: 22px;
-      border: 1px solid var(--pebble);
-      border-radius: 16px;
-      background: #f7f7f7;
+    .plan-trip-panel-headline {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: #166032;
     }
 
-    .plan-trip-summary div {
-      display: grid;
-      grid-template-columns: 160px 1fr;
-      gap: 16px;
-      color: var(--charcoal);
+    .plan-trip-panel-highlight {
+      background: #d8f3dc;
+      color: #1b4332;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: 28px 18px 24px;
+      }
+      .plan-trip-card {
+        padding: 24px;
+      }
+      .plan-trip-card-layout {
+        grid-template-columns: 1fr;
+      }
+      .plan-trip-grid {
+        grid-template-columns: 1fr;
+      }
+      .plan-trip-side {
+        min-height: auto;
+      }
     }
 
     @media (max-width: 768px) {
@@ -274,7 +380,9 @@
         <p>Fill in your destination, dates and traveler details. Our travel experts will reach out soon.</p>
       </div>
 
-      <form id="plan-trip-form" class="plan-trip-grid">
+      <div class="plan-trip-card-layout">
+        <div class="plan-trip-main">
+          <form id="plan-trip-form" class="plan-trip-grid">
         <div class="plan-trip-field">
           <label for="starting-location">Starting Location *</label>
           <input id="starting-location" name="starting_location" type="text" placeholder="City or town" required>
@@ -346,6 +454,23 @@
         </div>
         <div id="form-message" class="success-note"></div>
       </form>
+        </div>
+
+        <aside class="plan-trip-side">
+          <span class="plan-trip-panel-headline">LodgeHub trip management</span>
+          <h3>Custom travel planning made easy</h3>
+          <p>Share your travel dates, party size, and preferences once — we handle lodging, transfer, dining, and local activities for a seamless trip.</p>
+          <div class="plan-trip-panel-highlight">Trusted by 240+ travelers across India</div>
+          <ul class="plan-trip-feature-list">
+            <li>Tailored lodging and stay packages</li>
+            <li>Round-trip transport coordination</li>
+            <li>Meals, sightseeing, and local experiences</li>
+            <li>Group-specific plans: family, couple, friends, corporate</li>
+            <li>Flexible budget and comfort options</li>
+          </ul>
+          <p>Our team reviews every request and sends a personalized itinerary with travel support and quick confirmations.</p>
+        </aside>
+      </div>
     </section>
   </main>
 
