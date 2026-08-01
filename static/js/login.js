@@ -45,7 +45,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             );
 
-            const data = await response.json();
+            let data;
+            try {
+                data = await response.json();
+            } catch (parseError) {
+                data = { detail: await response.text() };
+            }
 
             console.log("Response Status:", response.status);
             console.log("Response Data:", data);
