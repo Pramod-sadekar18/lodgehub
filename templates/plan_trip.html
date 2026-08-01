@@ -50,11 +50,37 @@
       border-bottom: 1px solid var(--pebble);
     }
 
-    .logo-text {
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--forest);
       font-family: 'Playfair Display', serif;
       font-size: 24px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .site-logo {
+      width: 60px;
+      height: auto;
+      border-radius: 14px;
+      object-fit: contain;
+    }
+
+    .btn-ghost {
+      padding: 12px 20px;
+      text-decoration: none;
       color: var(--forest);
-      letter-spacing: -0.5px;
+      border: 1.5px solid var(--forest);
+      border-radius: 999px;
+      font-weight: 700;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .btn-ghost:hover {
+      background: var(--forest);
+      color: white;
     }
 
     .hero {
@@ -226,7 +252,10 @@
 
 <body>
   <header class="navbar">
-    <a href="{% url 'home' %}" class="logo-text">LodgeHub</a>
+    <a href="{% url 'home' %}" class="logo">
+      <img src="/media/image.png" alt="LodgeHub logo" class="site-logo" />
+      <span>LodgeHub</span>
+    </a>
     <a href="{% url 'home' %}" class="btn-ghost">Back to home</a>
   </header>
 

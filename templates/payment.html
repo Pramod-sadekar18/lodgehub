@@ -5,7 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment</title>
     <style>
-        body { font-family: Arial, sans-serif; background: #f5f7fb; margin: 0; padding: 40px; }
+        body { font-family: Arial, sans-serif; background: #f5f7fb; margin: 0; padding: 110px 40px 40px; }
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            background: white;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            z-index: 100;
+        }
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+            color: #111827;
+            font-weight: 700;
+        }
+        .site-logo {
+            width: 58px;
+            height: auto;
+            border-radius: 12px;
+        }
+        .home-link {
+            padding: 10px 16px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+        }
         .card { max-width: 700px; margin: 0 auto; background: white; border-radius: 12px; padding: 30px; box-shadow: 0 8px 25px rgba(0,0,0,0.08); }
         h1 { margin-top: 0; }
         .info { margin-top: 20px; line-height: 1.6; }
@@ -13,6 +47,13 @@
     </style>
 </head>
 <body>
+    <nav class="navbar">
+        <a href="/" class="logo">
+            <img src="/media/image.png" alt="LodgeHub logo" class="site-logo" />
+            LodgeHub
+        </a>
+        <a href="/" class="home-link">Home</a>
+    </nav>
     <div class="card">
         <h1>Payment</h1>
         <p>Your booking is ready. Please complete the payment to confirm your reservation.</p>

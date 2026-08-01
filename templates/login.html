@@ -26,7 +26,7 @@
     body{
         min-height:100vh;
         display:flex;
-        justify-content:center;
+        flex-direction:column;
         align-items:center;
         background:linear-gradient(
             135deg,
@@ -34,6 +34,41 @@
             #1e293b,
             #2563eb
         );
+        padding-top:110px;
+    }
+
+    .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 18px 32px;
+        background: rgba(255,255,255,0.95);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        z-index: 100;
+    }
+
+    .navbar a {
+        color: #0f172a;
+        text-decoration: none;
+        font-weight: 700;
+    }
+
+    .logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 26px;
+    }
+
+    .site-logo {
+        width: 56px;
+        height: auto;
+        display: block;
+        border-radius: 12px;
     }
 
     .container{
@@ -139,13 +174,15 @@
 </head>
 
 <body>
+    <nav class="navbar">
+        <a href="/" class="logo">
+            <img src="/media/image.png" alt="LodgeHub logo" class="site-logo">
+            LodgeHub
+        </a>
+        <a href="/">Home</a>
+    </nav>
 
-```
 <div class="container">
-
-    <div class="logo">
-        🏨
-    </div>
 
     <h1 class="title">
         Welcome Back
