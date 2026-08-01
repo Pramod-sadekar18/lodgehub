@@ -20,12 +20,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
         try {
 
+            const getCookie = (name) => {
+                const value = `; ${document.cookie}`;
+                const parts = value.split(`; ${name}=`);
+                if (parts.length === 2) return parts.pop().split(';').shift();
+                return null;
+            };
+
+            const csrfToken = getCookie('csrftoken');
+
             const response = await fetch(
-                "http://127.0.0.1:114/login/",
+                `${window.location.origin}/login/`,
                 {
                     method: "POST",
+                    credentials: "same-origin",
                     headers: {
-                        "Content-Type": "application/json"
+                        "Content-Type": "application/json",
+                        ...(csrfToken ? { "X-CSRFToken": csrfToken } : {})
                     },
                     body: JSON.stringify({
                         username: username,
@@ -38,6 +49,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
             console.log("Response Status:", response.status);
             console.log("Response Data:", data);
+
+            const messageElement = document.getElementById("message");
 
             if (response.ok) {
 
@@ -57,7 +70,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
             } else {
 
-                alert("Login Failed");
+                if (messageElement) {
+                    messageElement.textContent = data.detail || data.message || "Login failed. Please check your credentials.";
+                    messageElement.style.color = "#b91c1c";
+                } else {
+                    alert(data.detail || data.message || "Login failed. Please check your credentials.");
+                }
+
                 console.log(data);
             }
 
