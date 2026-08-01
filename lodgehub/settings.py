@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "accounts",
     "booking",
     "lodge",
+    "plan_trip",
     "rest_framework",
     "django_filters",
     "corsheaders",

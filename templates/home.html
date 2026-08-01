@@ -198,7 +198,7 @@
     /* ── HERO ────────────────────────────────────────────────── */
     .hero {
       background: var(--forest);
-      padding: 72px 48px 56px;
+      padding: 56px 48px 40px;
       position: relative;
       overflow: hidden;
     }
@@ -215,6 +215,16 @@
       max-width: 1100px;
       margin: 0 auto;
       position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(300px, 1fr);
+      gap: 32px;
+      align-items: start;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
     }
 
     .hero-eyebrow {
@@ -251,8 +261,186 @@
       font-size: 16px;
       color: rgba(255, 255, 255, .7);
       max-width: 440px;
-      margin-bottom: 36px;
+      margin-bottom: 24px;
       line-height: 1.7;
+    }
+
+    .hero-small-block {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: rgba(255, 255, 255, .14);
+      border: 1px solid rgba(216, 243, 220, .35);
+      border-radius: var(--r-xl);
+      padding: 14px 18px;
+      color: #fff;
+      max-width: 420px;
+      margin-bottom: 24px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+      justify-self: end;
+    }
+
+    .plan-trip-section {
+      padding: 40px 48px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .plan-trip-card {
+      background: #fff;
+      border-radius: var(--r-xl);
+      box-shadow: var(--shadow-md);
+      padding: 28px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .plan-trip-card h2 {
+      margin-bottom: 4px;
+      font-size: 28px;
+      color: var(--forest);
+    }
+
+    .plan-trip-card p {
+      color: var(--stone);
+      max-width: 720px;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .plan-trip-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .plan-trip-grid-full {
+      grid-column: 1 / -1;
+    }
+
+    .plan-trip-field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .plan-trip-field label {
+      color: var(--stone);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .plan-trip-field input,
+    .plan-trip-field select,
+    .plan-trip-field textarea {
+      border: 1px solid var(--pebble);
+      border-radius: var(--r-sm);
+      padding: 12px 14px;
+      font-size: 14px;
+      color: var(--charcoal);
+      background: #fff;
+      width: 100%;
+    }
+
+    .plan-trip-field textarea {
+      min-height: 112px;
+      resize: vertical;
+    }
+
+    .plan-trip-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .plan-trip-success {
+      display: none;
+      border: 1px solid var(--sage);
+      background: #ecfdf5;
+      padding: 16px 18px;
+      border-radius: var(--r-lg);
+      color: #166534;
+      font-weight: 600;
+    }
+
+    .plan-trip-success strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    @media (max-width: 900px) {
+      .plan-trip-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        padding: 42px 22px 32px;
+      }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .plan-trip-section {
+        padding: 24px 20px;
+      }
+    }
+
+    .hero-small-block h3 {
+      font-size: 20px;
+      margin-bottom: 6px;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .hero-small-block .small-block-subheading {
+      font-size: 14px;
+      color: rgba(255, 255, 255, .88);
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .hero-small-block p {
+      font-size: 14px;
+      color: rgba(255, 255, 255, .88);
+      line-height: 1.65;
+      margin-bottom: 12px;
+    }
+
+    .hero-feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 14px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .hero-feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: rgba(255, 255, 255, .9);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .hero-feature-list li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      margin-top: 8px;
+      border-radius: 999px;
+      background: var(--mint);
+      flex-shrink: 0;
+    }
+
+    .hero-cta {
+      padding: 11px 24px;
+      font-size: 14px;
+      align-self: flex-start;
     }
 
     /* Search box */
@@ -324,27 +512,35 @@
 
     /* Stats */
     .hero-stats {
-      display: flex;
-      gap: 36px;
-      margin-top: 36px;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 22px;
+      align-items: start;
+      max-width: 680px;
     }
 
-    .hero-stat {}
+    .hero-stat {
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 16px;
+    }
 
     .hero-stat-num {
       font-family: 'Playfair Display', serif;
-      font-size: 28px;
+      font-size: 24px;
       color: #fff;
       font-weight: 600;
+      line-height: 1.1;
     }
 
     .hero-stat-label {
-      font-size: 12px;
-      color: rgba(255, 255, 255, .55);
+      font-size: 11px;
+      color: rgba(255, 255, 255, .7);
       text-transform: uppercase;
-      letter-spacing: .6px;
-      margin-top: 2px;
+      letter-spacing: .7px;
+      margin-top: 4px;
     }
 
     /* ── CATEGORY CHIPS ──────────────────────────────────────── */
@@ -1067,57 +1263,160 @@
   <!-- HERO -->
   <section class="hero" aria-label="Search properties">
     <div class="hero-inner">
-      <div class="hero-eyebrow">
-        <i class="ti ti-leaf" aria-hidden="true"></i>
-        240+ verified properties across India
+      <div class="hero-content">
+        <div class="hero-eyebrow">
+          <i class="ti ti-leaf" aria-hidden="true"></i>
+          240+ verified properties across India
+        </div>
+        <h1>Find your <span>perfect stay</span>, every time</h1>
+        <p class="hero-sub">Luxury lodges, budget hotels, family resorts — curated and bookable in seconds.</p>
+        <div class="search-box" role="search">
+          <i class="ti ti-search search-icon" aria-hidden="true"></i>
+          <input type="text" id="search-input" placeholder="Search by name or city…" oninput="filterCards()"
+            aria-label="Search properties">
+          <div class="search-divider" aria-hidden="true"></div>
+          <select id="type-filter" onchange="filterCards()" aria-label="Property type">
+            <option value="">All types</option>
+            <option value="lodge">Lodge</option>
+            <option value="hotel">Hotel</option>
+            <option value="resort">Resort</option>
+            <option value="hostel">Hostel</option>
+          </select>
+          <div class="search-divider" aria-hidden="true"></div>
+          <select id="city-filter" onchange="filterCards()" aria-label="City">
+            <option value="">All cities</option>
+            <option value="Pune">Pune</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Lonavala">Lonavala</option>
+            <option value="Nashik">Nashik</option>
+            <option value="Alibaug">Alibaug</option>
+          </select>
+          <button class="search-btn" onclick="filterCards()">
+            <i class="ti ti-search" aria-hidden="true"></i> Search
+          </button>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-num">240+</div>
+            <div class="hero-stat-label">Properties</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">18</div>
+            <div class="hero-stat-label">Cities</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">4.8★</div>
+            <div class="hero-stat-label">Avg rating</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">12k+</div>
+            <div class="hero-stat-label">Happy guests</div>
+          </div>
+        </div>
       </div>
-      <h1>Find your <span>perfect stay</span>, every time</h1>
-      <p class="hero-sub">Luxury lodges, budget hotels, family resorts — curated and bookable in seconds.</p>
 
-      <div class="search-box" role="search">
-        <i class="ti ti-search search-icon" aria-hidden="true"></i>
-        <input type="text" id="search-input" placeholder="Search by name or city…" oninput="filterCards()"
-          aria-label="Search properties">
-        <div class="search-divider" aria-hidden="true"></div>
-        <select id="type-filter" onchange="filterCards()" aria-label="Property type">
-          <option value="">All types</option>
-          <option value="lodge">Lodge</option>
-          <option value="hotel">Hotel</option>
-          <option value="resort">Resort</option>
-          <option value="hostel">Hostel</option>
-        </select>
-        <div class="search-divider" aria-hidden="true"></div>
-        <select id="city-filter" onchange="filterCards()" aria-label="City">
-          <option value="">All cities</option>
-          <option value="Pune">Pune</option>
-          <option value="Mumbai">Mumbai</option>
-          <option value="Lonavala">Lonavala</option>
-          <option value="Nashik">Nashik</option>
-          <option value="Alibaug">Alibaug</option>
-        </select>
-        <button class="search-btn" onclick="filterCards()">
-          <i class="ti ti-search" aria-hidden="true"></i> Search
-        </button>
+      <div class="hero-small-block" aria-label="Trip planning summary">
+        <h3>Plan Your Trip With Us</h3>
+        <p class="small-block-subheading">Everything you need for your perfect trip.</p>
+        <p>We take care of your stay, travel, meals, sightseeing, and activities—so you can enjoy a stress-free journey.</p>
+        <ul class="hero-feature-list">
+          <li>✈️ Travel & Transportation</li>
+          <li>🏨 Hotel & Stay Booking</li>
+          <li>🍽️ Meals & Dining</li>
+          <li>🔍 Search & Compare Options</li>
+          <li>🎯 Local Activities</li>
+          <li>🚖 Airport Transfers</li>
+          <li>👨‍👩‍👧 Family, Couple & Group Packages</li>
+          <li>💰 Budget-Friendly Plans</li>
+        </ul>
+        <button class="btn-primary hero-cta" type="button" onclick="scrollToListings()">Plan Your Trip</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="plan-trip-section" aria-label="Plan your trip request">
+    <div class="plan-trip-card">
+      <div>
+        <h2>Plan Your Trip Request</h2>
+        <p>Share your travel details and our expert team will prepare a custom itinerary with the best stay, travel, and activity options.</p>
       </div>
 
-      <div class="hero-stats">
-        <div class="hero-stat">
-          <div class="hero-stat-num">240+</div>
-          <div class="hero-stat-label">Properties</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-num">18</div>
-          <div class="hero-stat-label">Cities</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-num">4.8★</div>
-          <div class="hero-stat-label">Avg rating</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-num">12k+</div>
-          <div class="hero-stat-label">Happy guests</div>
-        </div>
+      <div class="plan-trip-success" id="plan-trip-success" role="status" aria-live="polite">
+        <strong>Thank you!</strong>
+        We've received your trip request. Our travel expert will contact you shortly to discuss your requirements and prepare a personalized itinerary.
       </div>
+
+      <form id="plan-trip-form" class="plan-trip-grid">
+        <div class="plan-trip-field">
+          <label for="starting-location">Starting Location *</label>
+          <input id="starting-location" name="starting_location" type="text" placeholder="City or town" required>
+        </div>
+        <div class="plan-trip-field">
+          <label for="destination">Destination *</label>
+          <input id="destination" name="destination" type="text" placeholder="City or tourist spot" required>
+        </div>
+        <div class="plan-trip-field">
+          <label for="departure-date">Departure Date *</label>
+          <input id="departure-date" name="departure_date" type="date" required>
+        </div>
+        <div class="plan-trip-field">
+          <label for="travelers">Number of Travelers *</label>
+          <input id="travelers" name="travelers" type="number" min="1" placeholder="Total persons" required>
+        </div>
+        <div class="plan-trip-field">
+          <label for="duration-days">Trip Duration (Days) *</label>
+          <input id="duration-days" name="duration_days" type="number" min="1" placeholder="Days" required>
+        </div>
+        <div class="plan-trip-field">
+          <label for="duration-nights">Trip Duration (Nights) *</label>
+          <input id="duration-nights" name="duration_nights" type="number" min="0" placeholder="Nights" required>
+        </div>
+        <div class="plan-trip-field">
+          <label for="group-type">Group Type *</label>
+          <select id="group-type" name="group_type" required>
+            <option value="">Select group type</option>
+            <option value="solo">Solo</option>
+            <option value="couple">Couple</option>
+            <option value="family">Family</option>
+            <option value="boys">Boys Group</option>
+            <option value="girls">Girls Group</option>
+            <option value="mixed">Mixed Group</option>
+            <option value="corporate">Corporate Group</option>
+          </select>
+        </div>
+        <div class="plan-trip-field">
+          <label for="travel-mode">Preferred Travel Mode *</label>
+          <select id="travel-mode" name="travel_mode" required>
+            <option value="">Select travel mode</option>
+            <option value="bus">Bus</option>
+            <option value="train">Train</option>
+            <option value="flight">Flight</option>
+            <option value="lodgehub_car">LodgeHub Car Service</option>
+            <option value="private_bus">Private Travels</option>
+            <option value="self_drive">Self Drive</option>
+          </select>
+        </div>
+        <div class="plan-trip-field plan-trip-grid-full">
+          <label for="budget">Approximate Budget (Optional)</label>
+          <input id="budget" name="budget" type="text" placeholder="₹ per person or total budget">
+        </div>
+        <div class="plan-trip-field">
+          <label for="leader-name">Trip Leader Name *</label>
+          <input id="leader-name" name="leader_name" type="text" placeholder="Full name" required>
+        </div>
+        <div class="plan-trip-field">
+          <label for="leader-phone">Mobile Number *</label>
+          <input id="leader-phone" name="leader_phone" type="tel" placeholder="Mobile number" required>
+        </div>
+        <div class="plan-trip-field plan-trip-grid-full">
+          <label for="notes">Additional Notes (Optional)</label>
+          <textarea id="notes" name="notes" placeholder="Need pickup from Pune Railway Station, want adventure activities, need vegetarian meals"></textarea>
+        </div>
+        <div class="plan-trip-field plan-trip-grid-full plan-trip-actions">
+          <button type="submit" class="btn-primary">📞 Request Trip Plan</button>
+          <span style="color: var(--stone); font-size: 13px;">A travel expert will contact you shortly.</span>
+        </div>
+      </form>
     </div>
   </section>
 
@@ -1418,6 +1717,60 @@
       } catch (error) {
         console.error("Failed to load properties:", error);
         showToast("Could not load properties");
+      }
+
+      const planTripForm = document.getElementById('plan-trip-form');
+      if (planTripForm) {
+        planTripForm.addEventListener('submit', async function (event) {
+          event.preventDefault();
+          await submitPlanTripRequest();
+        });
+      }
+
+      async function submitPlanTripRequest() {
+        const form = document.getElementById('plan-trip-form');
+        const successMessage = document.getElementById('plan-trip-success');
+
+        const formData = {
+          starting_location: document.getElementById('starting-location').value,
+          destination: document.getElementById('destination').value,
+          departure_date: document.getElementById('departure-date').value,
+          duration_days: Number(document.getElementById('duration-days').value),
+          duration_nights: Number(document.getElementById('duration-nights').value),
+          travelers: Number(document.getElementById('travelers').value),
+          group_type: document.getElementById('group-type').value,
+          travel_mode: document.getElementById('travel-mode').value,
+          budget: document.getElementById('budget').value,
+          leader_name: document.getElementById('leader-name').value,
+          leader_phone: document.getElementById('leader-phone').value,
+          notes: document.getElementById('notes').value,
+        };
+
+        try {
+          const response = await fetch('/api/plan-trip/', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+          });
+
+          if (!response.ok) {
+            const errorData = await response.json();
+            const errorMessage = errorData.detail || errorData.message || 'Could not submit trip request.';
+            showToast(errorMessage);
+            return;
+          }
+
+          const result = await response.json();
+          successMessage.style.display = 'block';
+          form.reset();
+          showToast(result.message || 'Trip request submitted successfully');
+          window.scrollTo({ top: successMessage.offsetTop - 120, behavior: 'smooth' });
+        } catch (error) {
+          console.error('Plan trip request failed:', error);
+          showToast('Unable to submit trip request right now. Please try again later.');
+        }
       }
     }
     function loadCityDropdown() {
