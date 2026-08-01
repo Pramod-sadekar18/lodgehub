@@ -1773,6 +1773,7 @@
       async function submitPlanTripRequest() {
         const form = document.getElementById('plan-trip-form');
         const successPage = document.getElementById('plan-trip-success-page');
+        const apiUrl = `${window.location.origin}/api/plan-trip/`;
 
         const formData = {
           starting_location: document.getElementById('starting-location').value,
@@ -1790,7 +1791,7 @@
         };
 
         try {
-          const response = await fetch('/api/plan-trip/', {
+          const response = await fetch(apiUrl, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -1799,8 +1800,17 @@
           });
 
           if (!response.ok) {
-            const errorData = await response.json();
-            const errorMessage = errorData.detail || errorData.message || 'Could not submit trip request.';
+            let errorMessage = 'Could not submit trip request.';
+            try {
+              const errorData = await response.json();
+              errorMessage = errorData.detail || errorData.message || errorData.error || errorMessage;
+            } catch (jsonError) {
+              const text = await response.text();
+              if (text) {
+                errorMessage = text;
+              }
+            }
+            console.error('Plan trip request failed:', response.status, errorMessage);
             showToast(errorMessage);
             return;
           }
@@ -1811,7 +1821,7 @@
           showToast(result.message || 'Trip request submitted successfully');
         } catch (error) {
           console.error('Plan trip request failed:', error);
-          showToast('Unable to submit trip request right now. Please try again later.');
+          showToast(`Unable to submit trip request right now: ${error.message}`);
         }
       }
     }
