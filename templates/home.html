@@ -281,9 +281,14 @@
     }
 
     .plan-trip-section {
+      display: none;
       padding: 40px 48px;
       max-width: 1100px;
       margin: 0 auto;
+    }
+
+    .plan-trip-section.active {
+      display: block;
     }
 
     .plan-trip-card {
@@ -345,6 +350,30 @@
     .plan-trip-field textarea {
       min-height: 112px;
       resize: vertical;
+    }
+
+    .plan-trip-success-page {
+      background: #ECFDF5;
+      border: 1px solid #A7F3D0;
+      padding: 20px 22px;
+      border-radius: 16px;
+      display: grid;
+      gap: 12px;
+      color: #065F46;
+    }
+
+    .plan-trip-summary {
+      display: grid;
+      gap: 10px;
+      font-size: 14px;
+      color: #134E4A;
+      line-height: 1.6;
+    }
+
+    .plan-trip-summary div {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 8px;
     }
 
     .plan-trip-actions {
@@ -1329,24 +1358,38 @@
           <li>👨‍👩‍👧 Family, Couple & Group Packages</li>
           <li>💰 Budget-Friendly Plans</li>
         </ul>
-        <button class="btn-primary hero-cta" type="button" onclick="scrollToListings()">Plan Your Trip</button>
+        <button class="btn-primary hero-cta" type="button" onclick="showPlanTripForm()">Plan Your Trip</button>
       </div>
     </div>
   </section>
 
-  <section class="plan-trip-section" aria-label="Plan your trip request">
+  <section class="plan-trip-section" id="plan-trip-section" aria-label="Plan your trip request">
     <div class="plan-trip-card">
       <div>
         <h2>Plan Your Trip Request</h2>
         <p>Share your travel details and our expert team will prepare a custom itinerary with the best stay, travel, and activity options.</p>
       </div>
 
-      <div class="plan-trip-success" id="plan-trip-success" role="status" aria-live="polite">
+      <div class="plan-trip-success-page" id="plan-trip-success-page" role="status" aria-live="polite" style="display:none;">
         <strong>Thank you!</strong>
-        We've received your trip request. Our travel expert will contact you shortly to discuss your requirements and prepare a personalized itinerary.
+        <p>Your request has been received. Our experts will contact you soon.</p>
+        <div class="plan-trip-summary">
+          <div><strong>Starting Location:</strong> <span id="summary-starting-location"></span></div>
+          <div><strong>Destination:</strong> <span id="summary-destination"></span></div>
+          <div><strong>Departure Date:</strong> <span id="summary-departure-date"></span></div>
+          <div><strong>Duration:</strong> <span id="summary-duration"></span></div>
+          <div><strong>Travelers:</strong> <span id="summary-travelers"></span></div>
+          <div><strong>Group Type:</strong> <span id="summary-group-type"></span></div>
+          <div><strong>Travel Mode:</strong> <span id="summary-travel-mode"></span></div>
+          <div><strong>Budget:</strong> <span id="summary-budget"></span></div>
+          <div><strong>Trip Leader:</strong> <span id="summary-leader-name"></span></div>
+          <div><strong>Mobile Number:</strong> <span id="summary-leader-phone"></span></div>
+          <div><strong>Notes:</strong> <span id="summary-notes"></span></div>
+        </div>
+        <button type="button" class="btn-ghost" onclick="showPlanTripForm()">Submit another request</button>
       </div>
 
-      <form id="plan-trip-form" class="plan-trip-grid">
+      <form id="plan-trip-form" class="plan-trip-grid" style="display:none;">
         <div class="plan-trip-field">
           <label for="starting-location">Starting Location *</label>
           <input id="starting-location" name="starting_location" type="text" placeholder="City or town" required>
@@ -1729,7 +1772,7 @@
 
       async function submitPlanTripRequest() {
         const form = document.getElementById('plan-trip-form');
-        const successMessage = document.getElementById('plan-trip-success');
+        const successPage = document.getElementById('plan-trip-success-page');
 
         const formData = {
           starting_location: document.getElementById('starting-location').value,
@@ -1763,16 +1806,59 @@
           }
 
           const result = await response.json();
-          successMessage.style.display = 'block';
           form.reset();
+          showPlanTripSuccess(formData);
           showToast(result.message || 'Trip request submitted successfully');
-          window.scrollTo({ top: successMessage.offsetTop - 120, behavior: 'smooth' });
         } catch (error) {
           console.error('Plan trip request failed:', error);
           showToast('Unable to submit trip request right now. Please try again later.');
         }
       }
     }
+
+    function showPlanTripForm() {
+      const section = document.getElementById('plan-trip-section');
+      const form = document.getElementById('plan-trip-form');
+      const successPage = document.getElementById('plan-trip-success-page');
+      if (section) {
+        section.classList.add('active');
+      }
+      if (form) {
+        form.style.display = 'grid';
+      }
+      if (successPage) {
+        successPage.style.display = 'none';
+      }
+      window.scrollTo({ top: section.offsetTop - 80, behavior: 'smooth' });
+    }
+
+    function showPlanTripSuccess(values) {
+      const section = document.getElementById('plan-trip-section');
+      const form = document.getElementById('plan-trip-form');
+      const successPage = document.getElementById('plan-trip-success-page');
+      if (form) {
+        form.style.display = 'none';
+      }
+      if (successPage) {
+        document.getElementById('summary-starting-location').textContent = values.starting_location || '-';
+        document.getElementById('summary-destination').textContent = values.destination || '-';
+        document.getElementById('summary-departure-date').textContent = values.departure_date || '-';
+        document.getElementById('summary-duration').textContent = `${values.duration_days || 0} days, ${values.duration_nights || 0} nights`;
+        document.getElementById('summary-travelers').textContent = values.travelers || '-';
+        document.getElementById('summary-group-type').textContent = values.group_type || '-';
+        document.getElementById('summary-travel-mode').textContent = values.travel_mode || '-';
+        document.getElementById('summary-budget').textContent = values.budget || 'Not specified';
+        document.getElementById('summary-leader-name').textContent = values.leader_name || '-';
+        document.getElementById('summary-leader-phone').textContent = values.leader_phone || '-';
+        document.getElementById('summary-notes').textContent = values.notes || 'None';
+        successPage.style.display = 'grid';
+      }
+      if (section) {
+        section.classList.add('active');
+      }
+      window.scrollTo({ top: successPage.offsetTop - 100, behavior: 'smooth' });
+    }
+
     function loadCityDropdown() {
       const citySelect = document.getElementById("city-filter");
 
