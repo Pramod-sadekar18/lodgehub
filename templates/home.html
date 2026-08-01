@@ -1507,7 +1507,7 @@
 
     async function loadProperties() {
       try {
-        const response = await fetch("http://127.0.0.1:114/api/properties/");
+        const response = await fetch("/api/properties/");
         const data = await response.json();
 
         // DRF pagination safe handling
