@@ -539,13 +539,14 @@
 
     /* ── MAIN LAYOUT ─────────────────────────────────────────── */
     .page-body {
-      max-width: 1400px;
+      max-width: 1440px;
       margin: 0 auto;
       padding: 32px 24px;
       display: flex;
       gap: 24px;
       align-items: flex-start;
     }
+
 
     /* ── SIDEBAR ─────────────────────────────────────────────── */
     .sidebar {
@@ -555,17 +556,17 @@
 
     /* ── CHATBOT SECTION (Right side of properties section) ──── */
     .chatbot-sidebar {
-      width: 320px;
+      width: 360px;
       flex-shrink: 0;
       position: sticky;
       top: 80px;
-      height: 600px;
+      height: 620px;
       max-height: calc(100vh - 100px);
     }
 
     .chatbot-card {
       background: var(--warm-white);
-      border: 1px solid var(--pebble);
+      border: 2px solid var(--forest);
       border-radius: var(--r-lg);
       height: 100%;
       display: flex;
@@ -575,12 +576,13 @@
     }
 
     .chat-header {
-      background: linear-gradient(135deg, var(--forest) 0%, #2D6A4F 100%);
+      background: linear-gradient(135deg, #1B4332 0%, #2D6A4F 100%);
       color: #fff;
       padding: 14px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      border-bottom: 2px solid #112D22;
     }
 
     .chat-header-info {
@@ -613,9 +615,10 @@
     }
 
     .chat-title {
-      font-weight: 600;
-      font-size: 14px;
+      font-weight: 700;
+      font-size: 14.5px;
       line-height: 1.2;
+      color: #FFFFFF;
     }
 
     .chat-subtitle {
@@ -624,6 +627,7 @@
       display: flex;
       align-items: center;
       gap: 4px;
+      font-weight: 500;
     }
 
     .chat-reset-btn {
@@ -651,12 +655,12 @@
       overflow-y: auto;
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      background: #FBF9F6;
+      gap: 14px;
+      background: #F4F8F5;
     }
 
     .chat-msg {
-      max-width: 92%;
+      max-width: 96%;
       display: flex;
       flex-direction: column;
       gap: 4px;
@@ -674,11 +678,13 @@
 
     .chat-msg.user .msg-content {
       background: var(--forest);
-      color: #fff;
+      color: #FFFFFF;
       border-radius: 16px 16px 4px 16px;
-      padding: 9px 13px;
-      font-size: 13px;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+      padding: 10px 14px;
+      font-size: 13.5px;
+      font-weight: 600;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      border: 1.5px solid #112D22;
     }
 
     .chat-msg.bot {
@@ -687,15 +693,17 @@
     }
 
     .chat-msg.bot .msg-content {
-      background: #fff;
-      color: var(--charcoal);
-      border: 1px solid var(--pebble);
+      background: #FFFFFF;
+      color: #0F291E; /* High contrast dark green text for crisp visibility */
+      border: 2px solid #1B4332; /* Dark green border surrounding query block */
       border-radius: 16px 16px 16px 4px;
-      padding: 11px 13px;
-      font-size: 13px;
-      line-height: 1.5;
-      box-shadow: var(--shadow-sm);
+      padding: 12px 14px;
+      font-size: 13.5px;
+      font-weight: 500;
+      line-height: 1.55;
+      box-shadow: 0 4px 12px rgba(27, 67, 50, 0.08);
     }
+
 
     .msg-examples {
       margin-top: 8px;
@@ -889,6 +897,74 @@
       0%, 80%, 100% { transform: scale(0); }
       40% { transform: scale(1.0); }
     }
+
+    /* Interactive Menu & Subquery Buttons */
+    .chat-menu-container {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .chat-menu-title {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--forest);
+      margin-bottom: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .chat-menu-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .chat-menu-btn {
+      background: var(--warm-white);
+      border: 1.5px solid var(--sage);
+      color: var(--forest);
+      border-radius: 16px;
+      padding: 5px 11px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .chat-menu-btn:hover {
+      background: var(--mint);
+      border-color: var(--forest);
+      transform: translateY(-1px);
+    }
+
+    .chat-menu-btn.exit-btn {
+      border-color: #F87171;
+      color: #991B1B;
+      background: #FEF2F2;
+    }
+
+    .chat-menu-btn.exit-btn:hover {
+      background: #FEE2E2;
+      border-color: #DC2626;
+    }
+
+    .chat-menu-btn.back-btn {
+      border-color: var(--stone);
+      color: var(--stone);
+      background: #F3F4F6;
+    }
+
+    .chat-menu-btn.back-btn:hover {
+      background: #E5E7EB;
+      color: var(--charcoal);
+    }
+
 
 
     .filter-panel {
@@ -1534,8 +1610,10 @@
   <!-- NAVBAR -->
   <nav class="navbar" role="navigation" aria-label="Main navigation">
     <a class="logo" href="{% url 'home' %}">
+      <img src="/media/image.png" alt="LodgeHub Logo" style="height:38px; width:auto; border-radius:6px; object-fit:contain;">
       <span class="logo-text">LodgeHub</span>
     </a>
+
 
     <div class="nav-center">
       <a href="javascript:void(0)" class="nav-link active" onclick="navFilter('home', this)">Home</a>
@@ -1775,9 +1853,20 @@
           <!-- Initial bot welcome message -->
           <div class="chat-msg bot">
             <div class="msg-content">
-              👋 Hi! I am your AI Database Assistant. Type any question in plain text to query our database in real-time!
+              👋 Hi! Welcome to <strong>LodgeHub AI Assistant</strong>! Select a main query category or type your search below:
+              <div class="chat-menu-container">
+                <div class="chat-menu-title">Main Section Queries:</div>
+                <div class="chat-menu-buttons">
+                  <button class="chat-menu-btn" onclick="openSubMenu('rating')">⭐ Rating</button>
+                  <button class="chat-menu-btn" onclick="openSubMenu('price')">💰 Price</button>
+                  <button class="chat-menu-btn" onclick="openSubMenu('location')">📍 Location</button>
+                  <button class="chat-menu-btn" onclick="openSubMenu('type')">🏨 Type</button>
+                  <button class="chat-menu-btn exit-btn" onclick="handleChatExit()">❌ Exit</button>
+                </div>
+              </div>
             </div>
           </div>
+
         </div>
 
         <div class="chat-quick-prompts" id="chat-quick-prompts" style="display:none;"></div>
@@ -2384,17 +2473,131 @@
       }
     }
 
+    /* ── INTERACTIVE MENU & SUBQUERY ENGINE ──────────────────── */
+    function renderMainMenuHTML() {
+      return `
+        <div class="chat-menu-container">
+          <div class="chat-menu-title">Main Section Queries:</div>
+          <div class="chat-menu-buttons">
+            <button class="chat-menu-btn" onclick="openSubMenu('rating')">⭐ Rating</button>
+            <button class="chat-menu-btn" onclick="openSubMenu('price')">💰 Price</button>
+            <button class="chat-menu-btn" onclick="openSubMenu('location')">📍 Location</button>
+            <button class="chat-menu-btn" onclick="openSubMenu('type')">🏨 Type</button>
+            <button class="chat-menu-btn exit-btn" onclick="handleChatExit()">❌ Exit</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function openSubMenu(category) {
+      const chatMessages = document.getElementById("chat-messages");
+      let subMenuHTML = "";
+
+      if (category === 'rating') {
+        subMenuHTML = `
+          <div class="chat-menu-container">
+            <div class="chat-menu-title">Rating Options:</div>
+            <div class="chat-menu-buttons">
+              <button class="chat-menu-btn" onclick="sendQuickQuery('show top rated stays')">🌟 Highly Rated</button>
+              <button class="chat-menu-btn" onclick="sendQuickQuery('show low rated lodge')">⭐ Lowest Rated</button>
+              <button class="chat-menu-btn" onclick="sendQuickQuery('show lodge')">🏡 Lodge</button>
+              <button class="chat-menu-btn" onclick="sendQuickQuery('show hotel')">🏨 Hotel</button>
+              <button class="chat-menu-btn" onclick="sendQuickQuery('show resort')">🏖️ Resort</button>
+              <button class="chat-menu-btn back-btn" onclick="showMainMenuInChat()">🔙 Main Menu</button>
+              <button class="chat-menu-btn exit-btn" onclick="handleChatExit()">❌ Exit</button>
+            </div>
+          </div>
+        `;
+      } else if (category === 'price') {
+        subMenuHTML = `
+          <div class="chat-menu-container">
+            <div class="chat-menu-title">Price Options:</div>
+            <div class="chat-menu-buttons">
+              <button class="chat-menu-btn" onclick="sendQuickQuery('price below 3000 rupees')">💵 Below ₹3000</button>
+              <button class="chat-menu-btn" onclick="sendQuickQuery('price below 5000 rupees')">💸 Below ₹5000</button>
+              <button class="chat-menu-btn" onclick="sendQuickQuery('show highly expensive lodges')">💎 Highly Expensive</button>
+              <button class="chat-menu-btn" onclick="sendQuickQuery('show lowest price lodge')">📉 Lowest Price</button>
+              <button class="chat-menu-btn back-btn" onclick="showMainMenuInChat()">🔙 Main Menu</button>
+              <button class="chat-menu-btn exit-btn" onclick="handleChatExit()">❌ Exit</button>
+            </div>
+          </div>
+        `;
+      } else if (category === 'location') {
+        subMenuHTML = `
+          <div class="chat-menu-container">
+            <div class="chat-menu-title">Location Options:</div>
+            <div class="chat-menu-buttons">
+              <button class="chat-menu-btn" onclick="sendQuickQuery('show lodges in pune')">📍 Stays in Pune</button>
+              <button class="chat-menu-btn" onclick="sendQuickQuery('show lodges in mumbai')">📍 Stays in Mumbai</button>
+              <button class="chat-menu-btn" onclick="sendQuickQuery('show lodges in lonavala')">📍 Stays in Lonavala</button>
+              <button class="chat-menu-btn" onclick="sendQuickQuery('show lodges from maharastra')">📍 Stays in Maharashtra</button>
+              <button class="chat-menu-btn back-btn" onclick="showMainMenuInChat()">🔙 Main Menu</button>
+              <button class="chat-menu-btn exit-btn" onclick="handleChatExit()">❌ Exit</button>
+            </div>
+          </div>
+        `;
+      } else if (category === 'type') {
+        subMenuHTML = `
+          <div class="chat-menu-container">
+            <div class="chat-menu-title">Property Type Options:</div>
+            <div class="chat-menu-buttons">
+              <button class="chat-menu-btn" onclick="sendQuickQuery('show lodge')">🏡 Lodge</button>
+              <button class="chat-menu-btn" onclick="sendQuickQuery('show hotel')">🏨 Hotel</button>
+              <button class="chat-menu-btn" onclick="sendQuickQuery('show resort')">🏖️ Resort</button>
+              <button class="chat-menu-btn" onclick="sendQuickQuery('show hostel')">🎒 Hostel</button>
+              <button class="chat-menu-btn back-btn" onclick="showMainMenuInChat()">🔙 Main Menu</button>
+              <button class="chat-menu-btn exit-btn" onclick="handleChatExit()">❌ Exit</button>
+            </div>
+          </div>
+        `;
+      }
+
+      chatMessages.innerHTML += `
+        <div class="chat-msg bot">
+          <div class="msg-content">
+            ${subMenuHTML}
+          </div>
+        </div>
+      `;
+      scrollToBottom();
+    }
+
+    function showMainMenuInChat() {
+      const chatMessages = document.getElementById("chat-messages");
+      chatMessages.innerHTML += `
+        <div class="chat-msg bot">
+          <div class="msg-content">
+            Select a category to explore properties:
+            ${renderMainMenuHTML()}
+          </div>
+        </div>
+      `;
+      scrollToBottom();
+    }
+
+    function handleChatExit() {
+      const chatMessages = document.getElementById("chat-messages");
+      chatMessages.innerHTML += `
+        <div class="chat-msg bot">
+          <div class="msg-content" style="background:#ECFDF5; border:1px solid #A7F3D0; color:#065F46; border-radius:12px; padding:12px;">
+            ❤️ <strong>Welcome to our LodgeHub AI assistance. Stay healthy, stay happy, enjoy life, stay connected with LodgeHub!</strong>
+          </div>
+        </div>
+      `;
+      scrollToBottom();
+
+      setTimeout(() => {
+        showMainMenuInChat();
+      }, 400);
+    }
+
     function resetChatHistory() {
       const chatMessages = document.getElementById("chat-messages");
       chatMessages.innerHTML = `
         <div class="chat-msg bot">
           <div class="msg-content">
-            👋 Hi! I am your AI Database Assistant. Ask me anything about lodges & properties!
-            <div class="msg-examples">
-              <div class="example-chip" onclick="sendQuickQuery('show me price below 3000 rupees')">💡 "Price below 3000 rupees"</div>
-              <div class="example-chip" onclick="sendQuickQuery('show lodges near pune or in pune')">📍 "Lodges near or in Pune"</div>
-              <div class="example-chip" onclick="sendQuickQuery('luxury resorts with pool')">🏖️ "Luxury resorts with pool"</div>
-            </div>
+            👋 Hi! Welcome to <strong>LodgeHub AI Assistant</strong>! Select a main query category or type your search below:
+            ${renderMainMenuHTML()}
           </div>
         </div>
       `;
@@ -2417,8 +2620,8 @@
 
     loadUserNavbar();
     loadProperties();
-
   </script>
+
 
 </body>
 
