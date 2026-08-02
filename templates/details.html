@@ -407,6 +407,10 @@
             overflow: hidden;
             cursor: pointer;
             box-shadow: var(--shadow-sm);
+            border: none;
+            background: transparent;
+            padding: 0;
+            width: 100%;
         }
 
         .gallery-item img {
@@ -418,6 +422,85 @@
 
         .gallery-item:hover img {
             transform: scale(1.08);
+        }
+
+        .gallery-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.86);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            z-index: 500;
+        }
+
+        .gallery-overlay.active {
+            display: flex;
+        }
+
+        .gallery-modal {
+            position: relative;
+            width: min(1100px, 100%);
+            max-height: 90vh;
+        }
+
+        .gallery-modal img {
+            width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 18px;
+            box-shadow: var(--shadow-md);
+            background: white;
+        }
+
+        .gallery-nav,
+        .gallery-close {
+            position: absolute;
+            border: none;
+            color: white;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(8px);
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .gallery-nav:hover,
+        .gallery-close:hover {
+            background: rgba(255,255,255,0.35);
+        }
+
+        .gallery-nav {
+            top: 50%;
+            transform: translateY(-50%);
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            font-size: 20px;
+        }
+
+        .gallery-nav.prev { left: -16px; }
+        .gallery-nav.next { right: -16px; }
+
+        .gallery-close {
+            top: -14px;
+            right: -14px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 18px;
+        }
+
+        .gallery-caption {
+            position: absolute;
+            left: 16px;
+            bottom: 16px;
+            background: rgba(15,23,42,0.7);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 600;
         }
 
         /* ENHANCED MAP CARD */
@@ -781,15 +864,95 @@
             document.getElementById("rooms").innerHTML = roomHTML || "<p>No rooms available at the moment.</p>";
 
             // Populate Gallery
+            const galleryImages = Array.isArray(property.images) ? property.images.filter(img => img.image) : [];
             let galleryHTML = "";
-            (property.images || []).forEach(img => {
+            galleryImages.forEach((img, index) => {
                 galleryHTML += `
-                    <div class="gallery-item">
-                        <img src="${img.image}" alt="Property Photo">
-                    </div>
+                    <button class="gallery-item" type="button" data-index="${index}">
+                        <img src="${img.image}" alt="Property Photo ${index + 1}">
+                    </button>
                 `;
             });
             document.getElementById("gallery").innerHTML = galleryHTML || "<p>No photos available.</p>";
+
+            let currentGalleryIndex = 0;
+            let galleryModal = null;
+
+            function createGalleryModal() {
+                if (galleryModal) return galleryModal;
+
+                galleryModal = document.createElement("div");
+                galleryModal.className = "gallery-overlay";
+                galleryModal.setAttribute("role", "dialog");
+                galleryModal.setAttribute("aria-label", "Property image viewer");
+                galleryModal.innerHTML = `
+                    <div class="gallery-modal">
+                        <button class="gallery-close" type="button" aria-label="Close preview">✕</button>
+                        <button class="gallery-nav prev" type="button" aria-label="Previous image">←</button>
+                        <img id="galleryPreviewImage" src="" alt="Property preview">
+                        <button class="gallery-nav next" type="button" aria-label="Next image">→</button>
+                        <div id="galleryCaption" class="gallery-caption"></div>
+                    </div>
+                `;
+
+                galleryModal.addEventListener("click", (event) => {
+                    if (event.target === galleryModal || event.target.classList.contains("gallery-close")) {
+                        closeGalleryModal();
+                    }
+                });
+
+                document.body.appendChild(galleryModal);
+                return galleryModal;
+            }
+
+            function showGalleryImage(index) {
+                if (!galleryImages.length) return;
+
+                currentGalleryIndex = (index + galleryImages.length) % galleryImages.length;
+                const activeImage = galleryImages[currentGalleryIndex];
+                const previewImg = document.getElementById("galleryPreviewImage");
+                const caption = document.getElementById("galleryCaption");
+                if (previewImg) previewImg.src = activeImage.image;
+                if (caption) caption.innerText = `Image ${currentGalleryIndex + 1} of ${galleryImages.length}`;
+                createGalleryModal().classList.add("active");
+            }
+
+            function closeGalleryModal() {
+                if (galleryModal) {
+                    galleryModal.classList.remove("active");
+                }
+            }
+
+            document.querySelectorAll(".gallery-item").forEach(button => {
+                button.addEventListener("click", () => {
+                    showGalleryImage(Number(button.dataset.index));
+                });
+            });
+
+            document.addEventListener("keydown", (event) => {
+                if (!galleryModal || !galleryModal.classList.contains("active")) return;
+
+                if (event.key === "Escape") {
+                    closeGalleryModal();
+                } else if (event.key === "ArrowRight") {
+                    showGalleryImage(currentGalleryIndex + 1);
+                } else if (event.key === "ArrowLeft") {
+                    showGalleryImage(currentGalleryIndex - 1);
+                }
+            });
+
+            document.addEventListener("click", (event) => {
+                if (!galleryModal || !galleryModal.classList.contains("active")) return;
+
+                const prevBtn = event.target.closest(".gallery-nav.prev");
+                const nextBtn = event.target.closest(".gallery-nav.next");
+
+                if (prevBtn) {
+                    showGalleryImage(currentGalleryIndex - 1);
+                } else if (nextBtn) {
+                    showGalleryImage(currentGalleryIndex + 1);
+                }
+            });
 
             // ENHANCED MAP LOGIC & FALLBACK GEOCODING
             const fullAddress = `${property.address || ''}, ${property.location || ''}, ${property.city || ''}`.replace(/^, /, '').trim();
