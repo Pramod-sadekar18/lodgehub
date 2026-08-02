@@ -16,9 +16,10 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path,include 
+from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
+from lodge.views import property_detail_page
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -27,6 +28,8 @@ urlpatterns = [
     path("api/", include("lodge.urls")),
     path("book_api/", include("booking.urls")),
     path("api/plan-trip/", include("plan_trip.urls")),
+    path("property/<int:id>/", property_detail_page, name="property_detail_short"),
+    path("property/<int:id>/<slug:slug>/", property_detail_page, name="property_detail"),
 ]
 urlpatterns += static(
     settings.MEDIA_URL,
