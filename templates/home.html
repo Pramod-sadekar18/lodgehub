@@ -1775,26 +1775,15 @@
           <!-- Initial bot welcome message -->
           <div class="chat-msg bot">
             <div class="msg-content">
-              👋 Hi! I am your AI Database Assistant. Ask me anything about lodges & properties!
-              <div class="msg-examples">
-                <div class="example-chip" onclick="sendQuickQuery('show me price below 3000 rupees')">💡 "Price below 3000 rupees"</div>
-                <div class="example-chip" onclick="sendQuickQuery('show lodges near pune or in pune')">📍 "Lodges near or in Pune"</div>
-                <div class="example-chip" onclick="sendQuickQuery('luxury resorts with pool')">🏖️ "Luxury resorts with pool"</div>
-              </div>
+              👋 Hi! I am your AI Database Assistant. Type any question in plain text to query our database in real-time!
             </div>
           </div>
         </div>
 
-        <!-- Quick prompt chips -->
-        <div class="chat-quick-prompts" id="chat-quick-prompts">
-          <button class="quick-chip" onclick="sendQuickQuery('show me price below 3000 rupees')">Under ₹3000</button>
-          <button class="quick-chip" onclick="sendQuickQuery('show lodges near pune')">Stays in Pune</button>
-          <button class="quick-chip" onclick="sendQuickQuery('budget hotels')">Budget Stays</button>
-          <button class="quick-chip" onclick="sendQuickQuery('top rated lodges')">Top Rated ★</button>
-        </div>
+        <div class="chat-quick-prompts" id="chat-quick-prompts" style="display:none;"></div>
 
         <div class="chat-input-area">
-          <input type="text" id="chat-input" placeholder="Ask AI: e.g. Lodges under 3000 in Pune..." onkeydown="if(event.key==='Enter') sendChatMessage()">
+          <input type="text" id="chat-input" placeholder="Type any question freely..." onkeydown="if(event.key==='Enter') sendChatMessage()">
           <button class="chat-send-btn" id="chat-send-btn" onclick="sendChatMessage()" title="Send Message">
             <i class="ti ti-send" aria-hidden="true"></i>
           </button>
@@ -1802,6 +1791,7 @@
       </div>
     </aside>
   </div>
+
 
 
   <!-- FOOTER -->
