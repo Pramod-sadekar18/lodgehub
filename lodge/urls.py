@@ -32,6 +32,11 @@ urlpatterns = [
     path(
         "property/<int:id>/",
         property_detail_page,
+        name="property_detail_short"
+    ),
+    path(
+        "property/<int:id>/<slug:slug>/",
+        property_detail_page,
         name="property_detail"
     ),
     

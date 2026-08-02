@@ -92,6 +92,7 @@ class PropertySerializer(serializers.ModelSerializer):
             'id',
             'owner',
             'name',
+            'slug',
             'city',
             'location',
             'description',
@@ -224,6 +225,7 @@ class PropertyDetailSerializer(serializers.ModelSerializer):
             'owner',
 
             'name',
+            'slug',
             'city',
             'location',
             'address',
