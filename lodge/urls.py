@@ -5,7 +5,7 @@ from .views import (
     PropertyDetailView,
     property_page,
     property_detail_page,
-  
+    ChatbotAPIView,
 )
 
 router = DefaultRouter()
@@ -15,6 +15,8 @@ urlpatterns = [
     # DRF router URLs
     path('', include(router.urls)),
 
+    # Chatbot API endpoint
+    path('chatbot/', ChatbotAPIView.as_view(), name='chatbot_api'),
 
     # Manual endpoints
     path(
@@ -40,4 +42,4 @@ urlpatterns = [
         name="property_detail"
     ),
     
-]
+]

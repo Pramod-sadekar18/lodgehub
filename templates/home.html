@@ -539,19 +539,357 @@
 
     /* ── MAIN LAYOUT ─────────────────────────────────────────── */
     .page-body {
-      max-width: 1180px;
+      max-width: 1400px;
       margin: 0 auto;
       padding: 32px 24px;
       display: flex;
-      gap: 28px;
+      gap: 24px;
       align-items: flex-start;
     }
 
     /* ── SIDEBAR ─────────────────────────────────────────────── */
     .sidebar {
-      width: 260px;
+      width: 240px;
       flex-shrink: 0;
     }
+
+    /* ── CHATBOT SECTION (Right side of properties section) ──── */
+    .chatbot-sidebar {
+      width: 320px;
+      flex-shrink: 0;
+      position: sticky;
+      top: 80px;
+      height: 600px;
+      max-height: calc(100vh - 100px);
+    }
+
+    .chatbot-card {
+      background: var(--warm-white);
+      border: 1px solid var(--pebble);
+      border-radius: var(--r-lg);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+
+    .chat-header {
+      background: linear-gradient(135deg, var(--forest) 0%, #2D6A4F 100%);
+      color: #fff;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .chat-header-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .chat-avatar {
+      width: 36px;
+      height: 36px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      position: relative;
+    }
+
+    .online-indicator {
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      width: 9px;
+      height: 9px;
+      background: #4ADE80;
+      border: 2px solid var(--forest);
+      border-radius: 50%;
+    }
+
+    .chat-title {
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 1.2;
+    }
+
+    .chat-subtitle {
+      font-size: 11px;
+      color: var(--mint);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .chat-reset-btn {
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      color: #fff;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 15px;
+      transition: background 0.15s;
+    }
+
+    .chat-reset-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .chat-messages {
+      flex: 1;
+      padding: 14px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: #FBF9F6;
+    }
+
+    .chat-msg {
+      max-width: 92%;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      animation: fadeInMsg 0.2s ease-out;
+    }
+
+    @keyframes fadeInMsg {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .chat-msg.user {
+      align-self: flex-end;
+    }
+
+    .chat-msg.user .msg-content {
+      background: var(--forest);
+      color: #fff;
+      border-radius: 16px 16px 4px 16px;
+      padding: 9px 13px;
+      font-size: 13px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+
+    .chat-msg.bot {
+      align-self: flex-start;
+      width: 100%;
+    }
+
+    .chat-msg.bot .msg-content {
+      background: #fff;
+      color: var(--charcoal);
+      border: 1px solid var(--pebble);
+      border-radius: 16px 16px 16px 4px;
+      padding: 11px 13px;
+      font-size: 13px;
+      line-height: 1.5;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .msg-examples {
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .example-chip {
+      background: var(--sand);
+      border: 1px dashed var(--sage);
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 11.5px;
+      color: var(--forest);
+      cursor: pointer;
+      transition: background 0.15s, border-style 0.15s;
+    }
+
+    .example-chip:hover {
+      background: var(--mint);
+      border-style: solid;
+    }
+
+    /* Mini property cards in chat */
+    .chat-property-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .chat-property-item {
+      background: #F8FAF9;
+      border: 1px solid #D6E4DC;
+      border-radius: 10px;
+      padding: 8px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      cursor: pointer;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .chat-property-item:hover {
+      border-color: var(--sage);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .chat-prop-img {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      object-fit: cover;
+      background: var(--mint);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .chat-prop-details {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .chat-prop-name {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--forest);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .chat-prop-loc {
+      font-size: 11px;
+      color: var(--stone);
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .chat-prop-price {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--charcoal);
+    }
+
+    .chat-quick-prompts {
+      padding: 8px 12px;
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      background: #FAF9F6;
+      border-top: 1px solid var(--pebble);
+    }
+
+    .chat-quick-prompts::-webkit-scrollbar {
+      display: none;
+    }
+
+    .quick-chip {
+      background: #fff;
+      border: 1px solid var(--pebble);
+      border-radius: 14px;
+      padding: 4px 10px;
+      font-size: 11px;
+      color: var(--stone);
+      cursor: pointer;
+      white-space: nowrap;
+      font-family: 'DM Sans', sans-serif;
+      transition: all 0.15s;
+    }
+
+    .quick-chip:hover {
+      background: var(--mint);
+      border-color: var(--sage);
+      color: var(--forest);
+    }
+
+    .chat-input-area {
+      padding: 10px;
+      background: var(--warm-white);
+      border-top: 1px solid var(--pebble);
+      display: flex;
+      gap: 8px;
+    }
+
+    .chat-input-area input {
+      flex: 1;
+      border: 1.5px solid var(--pebble);
+      border-radius: var(--r-sm);
+      padding: 8px 12px;
+      font-size: 13px;
+      font-family: 'DM Sans', sans-serif;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .chat-input-area input:focus {
+      border-color: var(--sage);
+    }
+
+    .chat-send-btn {
+      background: var(--forest);
+      color: #fff;
+      border: none;
+      border-radius: var(--r-sm);
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.15s, transform 0.1s;
+      flex-shrink: 0;
+    }
+
+    .chat-send-btn:hover {
+      background: var(--sage);
+    }
+
+    .chat-send-btn:active {
+      transform: scale(0.95);
+    }
+
+    /* Typing indicator */
+    .typing-indicator {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      padding: 4px 0;
+    }
+
+    .typing-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--sage);
+      border-radius: 50%;
+      animation: bounceDot 1.4s infinite ease-in-out both;
+    }
+
+    .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+    .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+    @keyframes bounceDot {
+      0%, 80%, 100% { transform: scale(0); }
+      40% { transform: scale(1.0); }
+    }
+
 
     .filter-panel {
       background: var(--warm-white);
@@ -1413,7 +1751,58 @@
 
       <div class="pagination" id="pagination" role="navigation" aria-label="Page navigation"></div>
     </main>
+
+    <!-- CHATBOT SECTION (Right side of properties section) -->
+    <aside class="chatbot-sidebar" aria-label="Database Chatbot Assistant">
+      <div class="chatbot-card">
+        <div class="chat-header">
+          <div class="chat-header-info">
+            <div class="chat-avatar">
+              <i class="ti ti-bot" aria-hidden="true"></i>
+              <span class="online-indicator" title="Connected to Database"></span>
+            </div>
+            <div>
+              <div class="chat-title">LodgeHub Assistant</div>
+              <div class="chat-subtitle"><i class="ti ti-database" style="font-size:11px;"></i> Database Connected</div>
+            </div>
+          </div>
+          <button class="chat-reset-btn" onclick="resetChatHistory()" title="Reset chat">
+            <i class="ti ti-refresh" aria-hidden="true"></i>
+          </button>
+        </div>
+
+        <div class="chat-messages" id="chat-messages">
+          <!-- Initial bot welcome message -->
+          <div class="chat-msg bot">
+            <div class="msg-content">
+              👋 Hi! I am your AI Database Assistant. Ask me anything about lodges & properties!
+              <div class="msg-examples">
+                <div class="example-chip" onclick="sendQuickQuery('show me price below 3000 rupees')">💡 "Price below 3000 rupees"</div>
+                <div class="example-chip" onclick="sendQuickQuery('show lodges near pune or in pune')">📍 "Lodges near or in Pune"</div>
+                <div class="example-chip" onclick="sendQuickQuery('luxury resorts with pool')">🏖️ "Luxury resorts with pool"</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick prompt chips -->
+        <div class="chat-quick-prompts" id="chat-quick-prompts">
+          <button class="quick-chip" onclick="sendQuickQuery('show me price below 3000 rupees')">Under ₹3000</button>
+          <button class="quick-chip" onclick="sendQuickQuery('show lodges near pune')">Stays in Pune</button>
+          <button class="quick-chip" onclick="sendQuickQuery('budget hotels')">Budget Stays</button>
+          <button class="quick-chip" onclick="sendQuickQuery('top rated lodges')">Top Rated ★</button>
+        </div>
+
+        <div class="chat-input-area">
+          <input type="text" id="chat-input" placeholder="Ask AI: e.g. Lodges under 3000 in Pune..." onkeydown="if(event.key==='Enter') sendChatMessage()">
+          <button class="chat-send-btn" id="chat-send-btn" onclick="sendChatMessage()" title="Send Message">
+            <i class="ti ti-send" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </aside>
   </div>
+
 
   <!-- FOOTER -->
   <footer>
@@ -1894,10 +2283,153 @@
       window.location.href = "{% url 'profile_page' %}";
     }
 
+    /* ── CHATBOT FUNCTIONS ───────────────────────────────────── */
+    async function sendChatMessage() {
+      const inputEl = document.getElementById("chat-input");
+      const message = inputEl.value.trim();
+      if (!message) return;
+
+      inputEl.value = "";
+
+      // 1. User Message Bubble
+      const chatMessages = document.getElementById("chat-messages");
+      chatMessages.innerHTML += `
+        <div class="chat-msg user">
+          <div class="msg-content">${escapeHTML(message)}</div>
+        </div>
+      `;
+      scrollToBottom();
+
+      // 2. Typing Indicator
+      const typingId = "typing-" + Date.now();
+      chatMessages.innerHTML += `
+        <div class="chat-msg bot" id="${typingId}">
+          <div class="msg-content">
+            <div class="typing-indicator">
+              <span class="typing-dot"></span>
+              <span class="typing-dot"></span>
+              <span class="typing-dot"></span>
+            </div>
+          </div>
+        </div>
+      `;
+      scrollToBottom();
+
+      try {
+        const res = await fetch("/api/chatbot/", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: message })
+        });
+        const data = await res.json();
+
+        // Remove typing indicator
+        const typingEl = document.getElementById(typingId);
+        if (typingEl) typingEl.remove();
+
+        // Build properties HTML if available
+        let propsHTML = "";
+        if (data.properties && data.properties.length > 0) {
+          propsHTML = `<div class="chat-property-list">` +
+            data.properties.map(p => `
+              <div class="chat-property-item" onclick="openCard(${p.id})">
+                ${p.image 
+                  ? `<img src="${p.image}" class="chat-prop-img" alt="${escapeHTML(p.name)}">` 
+                  : `<div class="chat-prop-img">🏨</div>`
+                }
+                <div class="chat-prop-details">
+                  <div class="chat-prop-name">${escapeHTML(p.name)}</div>
+                  <div class="chat-prop-loc"><i class="ti ti-map-pin"></i> ${escapeHTML(p.city)}</div>
+                  <div class="chat-prop-price">₹${p.price_per_night.toLocaleString('en-IN')} <span style="font-size:10px;font-weight:normal;color:var(--stone)">/ night</span></div>
+                </div>
+                <i class="ti ti-chevron-right" style="color:var(--sage);font-size:16px;"></i>
+              </div>
+            `).join('') +
+          `</div>`;
+        }
+
+        // Render Bot Reply
+        const formattedReply = data.reply ? data.reply.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') : "Here are the results:";
+        chatMessages.innerHTML += `
+          <div class="chat-msg bot">
+            <div class="msg-content">
+              ${formattedReply}
+              ${propsHTML}
+            </div>
+          </div>
+        `;
+        scrollToBottom();
+
+        // Update Quick Suggestions if provided
+        if (data.suggestions && data.suggestions.length > 0) {
+          const quickContainer = document.getElementById("chat-quick-prompts");
+          if (quickContainer) {
+            quickContainer.innerHTML = data.suggestions.map(s => 
+              `<button class="quick-chip" onclick="sendQuickQuery('${escapeHTML(s).replace(/'/g, "\\'")}')">${escapeHTML(s)}</button>`
+            ).join('');
+          }
+        }
+
+      } catch (err) {
+        console.error("Chatbot API error:", err);
+        const typingEl = document.getElementById(typingId);
+        if (typingEl) typingEl.remove();
+
+        chatMessages.innerHTML += `
+          <div class="chat-msg bot">
+            <div class="msg-content" style="color:#b91c1c;">
+              ⚠️ Could not connect to database chatbot. Please try again.
+            </div>
+          </div>
+        `;
+        scrollToBottom();
+      }
+    }
+
+    function sendQuickQuery(text) {
+      const inputEl = document.getElementById("chat-input");
+      if (inputEl) {
+        inputEl.value = text;
+        sendChatMessage();
+      }
+    }
+
+    function resetChatHistory() {
+      const chatMessages = document.getElementById("chat-messages");
+      chatMessages.innerHTML = `
+        <div class="chat-msg bot">
+          <div class="msg-content">
+            👋 Hi! I am your AI Database Assistant. Ask me anything about lodges & properties!
+            <div class="msg-examples">
+              <div class="example-chip" onclick="sendQuickQuery('show me price below 3000 rupees')">💡 "Price below 3000 rupees"</div>
+              <div class="example-chip" onclick="sendQuickQuery('show lodges near pune or in pune')">📍 "Lodges near or in Pune"</div>
+              <div class="example-chip" onclick="sendQuickQuery('luxury resorts with pool')">🏖️ "Luxury resorts with pool"</div>
+            </div>
+          </div>
+        </div>
+      `;
+      showToast("Chat reset");
+    }
+
+    function scrollToBottom() {
+      const chatMessages = document.getElementById("chat-messages");
+      if (chatMessages) {
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+    }
+
+    function escapeHTML(str) {
+      if (!str) return '';
+      return String(str).replace(/[&<>'"]/g, 
+        tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+      );
+    }
+
     loadUserNavbar();
     loadProperties();
 
   </script>
+
 </body>
 
 </html>

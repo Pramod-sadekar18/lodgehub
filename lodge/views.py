@@ -67,3 +67,23 @@ def property_detail_page(request, id, slug=None):
         {"property_id": id, "property_slug": property_obj.slug}
     )
 
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .chatbot import DatabaseChatbotEngine
+
+class ChatbotAPIView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        message = request.data.get("message", "")
+        response_data = DatabaseChatbotEngine.process_query(message)
+        return Response(response_data, status=status.HTTP_200_OK)
+
+    def get(self, request):
+        message = request.query_params.get("message", "")
+        response_data = DatabaseChatbotEngine.process_query(message)
+        return Response(response_data, status=status.HTTP_200_OK)
+
+
