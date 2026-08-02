@@ -33,7 +33,7 @@ class Property(models.Model):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='properties')
 
     name = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=255, unique=True, blank=True)
+    slug = models.SlugField(max_length=255, unique=True, blank=True, null=True)
     city = models.CharField(max_length=100)
     location = models.CharField(max_length=255)
 
